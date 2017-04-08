@@ -1,10 +1,26 @@
-# Diabetic-Analysis:
+# Data-Science-Projects:
 
-This modules involves analysis of more than 1,00,000 Clinical Database Patient Records aiming to understand if a person given clinical information would be readmitted to the hospital. 
+Contains several data science projects.
 
-The modules employs the Spark architecture leveraging the Spark Machine Learning library (MLLIB) to perform the analysis.
+Data {source URL} : 
+	1. http://archive.ics.uci.edu/ml/
+	2. https://www.lendingclub.com/info/download-data.action
 
-Sources of reference:
+Technologies Used:
+	1. PySpark
+	2. R
+	3. Python
 
-    1. Research Article: Impact of HbA1c Measurement on Hospital Readmission Rates: Analysis of 70,000 Clinical Database Patient Records. "https://www.hindawi.com/journals/bmri/2014/781670/"
-    2. Dataset available at: "https://archive.ics.uci.edu/ml/datasets/Diabetes+130-US+hospitals+for+years+1999-2008#"
+
+Data-Analytics Methods:
+
+	Feature Selection:
+		1. AIC (Akiake Information criterion)
+		2. BIC (Bayesian Information criterion)
+		3. LASSO (Least Absolute Shrinkage and Selection Operator)
+
+	Models Employed:
+		1. GLM's (Logistic/Ridge/Lasso)
+		2. Decision trees
+		3. Random Forests
+		4. Naive Bayes
