@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Thu Apr 06 01:19:00 CDT 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-015b-41ea-8671-00000eb99f38 
-on database directory /Users/sam/All-Program/App/Diabetic-Analysis-Spark/metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@28931dc4 
+Wed Apr 12 13:33:35 CDT 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-015b-6371-33a9-00000c25bbb8 
+on database directory /Users/sam/All-Program/App/Data-Science-Projects/Diabetic-Readmission/metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@4ac9d6b4 
 Loaded from file:/Users/sam/App-Setup/spark/jars/derby-10.12.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_101-b13
-user.dir=/Users/sam/All-Program/App/Diabetic-Analysis-Spark
+user.dir=/Users/sam/All-Program/App/Data-Science-Projects/Diabetic-Readmission
 os.name=Mac OS X
 os.arch=x86_64
-os.version=10.12.3
+os.version=10.12.4
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
