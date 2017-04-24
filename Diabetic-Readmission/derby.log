@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Thu Apr 20 18:36:08 CDT 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-015b-8db9-1245-00000c374198 
-on database directory /Users/sam/All-Program/App/Data-Science-Projects/Diabetic-Readmission/metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@4ac9d6b4 
+Mon Apr 24 03:08:27 CDT 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-015b-9f01-30f4-00000c03e208 
+on database directory /Users/sam/All-Program/App/Data-Science-Projects/Diabetic-Readmission/metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@1b2a3fc7 
 Loaded from file:/Users/sam/App-Setup/spark/jars/derby-10.12.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_101-b13
