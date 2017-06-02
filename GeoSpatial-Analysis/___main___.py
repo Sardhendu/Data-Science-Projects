@@ -4,6 +4,7 @@ import numpy as np
 # Packages:
 from SpatialHandlers import SpatialHandler
 from Tools import Operations
+from Clusters import DBSCAN_Cluters
 
 
 #################### Initial Dataset Builder and Data Preparer
@@ -54,7 +55,7 @@ def dataPrep(chicagoCrime, sparseNeighbor=False):
 
 ###################### Clustering with DBSCAN
 ###################### Find Top Clusters (Individual Clusters)
-def dataCluster():
+def dataCluster(dataIN):
 	## Clustering:
 	objDBSCAN = DBSCAN_Cluters(eps=0.1, min_samples=19, metric='euclidean')
 	objDBSCAN.set_data(dataIN)
@@ -70,15 +71,20 @@ def dataCluster():
 
 
 	## Analysis:
-	cluster_groupByDF = onjDBSCAN.cluster_info(clusterLabels)
-	print (cluster_groupByDF.head())
+	cluster_groupByDF = objDBSCAN.cluster_info(clusterLabels)
+	# print (cluster_groupByDF.head())
+
+	return clusters, cluster_groupByDF
 
 
 ##################### Main Call
-
-def __main__():
+__main__ = True
+if __main__:
 	chicago_crm_pointsDir = '/Users/sam/All-Program/App-DataSet/Study/GeoSpatial-Analysis/Crimes2015_NA_rmv_sampl.csv'
-	chicagoCrime = dataBuilder()
+	chicagoCrime = dataBuilder(chicago_crm_pointsDir)
 	# print (chicagoCrime.head())
 	dataUTM_scaled = dataPrep(chicagoCrime, sparseNeighbor=False)
-	print (dataUTM_scaled)
+	clusters, cluster_groupByDF = dataCluster(dataUTM_scaled)
+	print (cluster_groupByDF.head())
+
+

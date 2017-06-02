@@ -1,7 +1,7 @@
 
 
 from Plots import Plot
-from ___main___ import dataBuilder, dataCluster
+from ___main___ import dataBuilder, dataPrep, dataCluster
 
 ################## Density plots
 
@@ -95,7 +95,7 @@ if density_plot:
 if cluster_plot:
 	# print (chicagoCrime.head())
 	dataUTM_scaled = dataPrep(chicagoCrime, sparseNeighbor=False)
-	print (dataUTM_scaled)
-	clusterPlot()
+	clusters, cluster_groupByDF = dataCluster(dataUTM_scaled)
+	clusterPlot(clusters)
 if individualClusterPlot:
 	individualClusterPlot(chicagoCrimeNew, clusterLabels_IN)
