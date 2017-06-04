@@ -103,7 +103,7 @@ class Plot(GlobalPlot):
     def __init__(self):
         GlobalPlot.__init__(self)
         self.fig = tools.make_subplots(rows=1, cols=1)
-        self.fig['layout'].update(height=400, width=400)
+        self.fig['layout'].update(height=600, width=600)
         
         # Plot Layout/config default
         self.plot_type = 'scatter'

@@ -1,7 +1,7 @@
 
-
+import numpy as np
 from Plots import Plot
-from ___main___ import dataBuilder, dataPrep, dataCluster
+from ___main___ import dataBuilder, dataPrep, densityClusterBuilder
 
 ################## Density plots
 
@@ -35,7 +35,7 @@ def densityPlot(datIN):
 
 #################### Cluster Plot
 ## Plots:
-def clusterPlot(dataIN, clusterLabelsIN):
+def densityClusterPlot(dataIN, clusterLabelsIN):
 	obj_plot = Plot()
 	obj_plot.set_figure(1,2, 600,1200)
 
@@ -48,54 +48,55 @@ def clusterPlot(dataIN, clusterLabelsIN):
 	obj_plot.show(plotFileName='Cluster-Plot')
 
 
-def individualClusterPlot(dataIN, clusterLabels_IN):
-	out = objDBSCAN.get_topClusters(clusterLabels=clusterLabels_IN, how_many=4)
-	cluster_1 = dataIN.iloc[[values for key, values in out[0].items()][0],:]
-	cluster_2 = dataIN.iloc[[values for key, values in out[1].items()][0],:]
-	cluster_3 = dataIN.iloc[[values for key, values in out[2].items()][0],:]
-	cluster_4 = dataIN.iloc[[values for key, values in out[3].items()][0],:]
-
+def topClusterPlot(dataIN, list_of_topClustersDF, how_many=4):#dataIN, clusterLabels_IN):
 	obj_plot = Plot()
-	obj_plot.set_figure(2,2)
+	obj_plot.set_figure(int(np.ceil(how_many/2)), 2)
 
-	# Plot 1:
-	obj_plot.set_config(dict(plot_type='scatter', plot_mode='markers', plot_name='cluster1', marker_config=dict(size=4,opacity=0.3, color='black')))
-	obj_plot.base_plot(x=dataIN['lonUTM'], y=dataIN['latUTM'])
-	obj_plot.set_config(dict(plot_type='scatter', plot_mode='markers', marker_config=dict(size=4,opacity=0.3, color='blue')))
-	obj_plot.add_plot(x=cluster_1['lonUTM'], y=cluster_1['latUTM'])
+	for clusterNum, clusterPoints in enumerate(list_of_topClustersDF):
+			# Plot 1:
+		obj_plot.set_config(dict(plot_type='scatter', 
+			plot_mode='markers', 
+			plot_name='cluster'+str(clusterNum), 
+			marker_config=dict(size=4,opacity=0.3, color='black'))
+		)
+		obj_plot.base_plot(x=dataIN['lonUTM'], y=dataIN['latUTM'])
 
-	#plot 2:
-	obj_plot.set_config(dict(plot_type='scatter', plot_mode='markers', plot_name='cluster2', marker_config=dict(size=4,opacity=0.3, color='black')))
-	obj_plot.base_plot(x=dataIN['lonUTM'], y=dataIN['latUTM'])
-	obj_plot.set_config(dict(plot_type='scatter', plot_mode='markers', marker_config=dict(size=4,opacity=0.3, color='red')))
-	obj_plot.add_plot(x=cluster_2['lonUTM'], y=cluster_2['latUTM'])
+		obj_plot.set_config(dict(plot_type='scatter', 
+			plot_mode='markers', 
+			marker_config=dict(size=4,opacity=0.3, color='blue'))
+		)
+		obj_plot.add_plot(x=clusterPoints['lonUTM'], y=clusterPoints['latUTM'])
 
-	obj_plot.set_config(dict(plot_type='scatter', plot_mode='markers', plot_name='cluster3', marker_config=dict(size=4,opacity=0.3, color='black')))
-	obj_plot.base_plot(x=dataIN['lonUTM'], y=dataIN['latUTM'])
-	obj_plot.set_config(dict(plot_type='scatter', plot_mode='markers', marker_config=dict(size=4,opacity=0.3, color='orange')))
-	obj_plot.add_plot(x=cluster_3['lonUTM'], y=cluster_3['latUTM'])
-
-	obj_plot.set_config(dict(plot_type='scatter', plot_mode='markers', plot_name='cluster4', marker_config=dict(size=4,opacity=0.3, color='black')))
-	obj_plot.base_plot(x=dataIN['lonUTM'], y=dataIN['latUTM'])
-	obj_plot.set_config(dict(plot_type='scatter', plot_mode='markers', marker_config=dict(size=4,opacity=0.3, color='green')))
-	obj_plot.add_plot(x=cluster_4['lonUTM'], y=cluster_4['latUTM'])
-
-	obj_plot.show()
+	obj_plot.show(plotFileName='Top Clusters - Plot')
 
 
 
 density_plot = True
 cluster_plot = True
-individualClusterPlot = False
+top_cluster_plot = True
+how_many_top_clusters = 6
 
 if density_plot:
 	chicago_crm_pointsDir = '/Users/sam/All-Program/App-DataSet/Study/GeoSpatial-Analysis/Crimes2015_NA_rmv_sampl.csv'
 	chicagoCrime = dataBuilder(chicago_crm_pointsDir)
 	densityPlot(chicagoCrime)
-if cluster_plot:
+
+if density_plot and cluster_plot:
 	# print (chicagoCrime.head())
 	dataUTM_scaled = dataPrep(chicagoCrime, sparseNeighbor=False)
-	clusters, cluster_groupByDF = dataCluster(dataUTM_scaled)
-	clusterPlot(clusters)
-if individualClusterPlot:
-	individualClusterPlot(chicagoCrimeNew, clusterLabels_IN)
+	clusterLabels, cluster_groupByDF, topClusterIndices_Dict = densityClusterBuilder(dataUTM_scaled, how_many=how_many_top_clusters)
+	print (clusterLabels)
+
+	# Plot the cluster density plot
+	densityClusterPlot(dataUTM_scaled, clusterLabels)
+
+	## Add the cluster column to the dataframe:
+	chicagoCrimeNew = chicagoCrime[['lonUTM','latUTM']]
+	chicagoCrimeNew['clusterNo'] = clusterLabels
+
+	if top_cluster_plot:
+		list_of_topClustersDF = []
+
+		for num in np.arange(how_many_top_clusters): 
+			list_of_topClustersDF.append(chicagoCrimeNew.iloc[[values for key, values in topClusterIndices_Dict[num].items()][0],:])
+		topClusterPlot(chicagoCrimeNew, list_of_topClustersDF, how_many=how_many_top_clusters)

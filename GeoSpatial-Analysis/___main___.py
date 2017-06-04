@@ -55,26 +55,36 @@ def dataPrep(chicagoCrime, sparseNeighbor=False):
 
 ###################### Clustering with DBSCAN
 ###################### Find Top Clusters (Individual Clusters)
-def dataCluster(dataIN):
+def densityClusterBuilder(dataScaled, how_many = None):
+	'''
+		Input: 
+			1. dataScaled: The Scaled Data.
+			2. how_many: retrieve how many top clusters
+
+		Output:
+			1. clusterLabels : A list containing the label of each data set assigned to the cluster number
+			2. cluster_groupByDF: A data frame consisting the cluster number and the count of elements in that cluster
+			3. topClusterIndices_Dict : A dictionary containing the top most dense clusters and all the elements in it This output is only used for analysis, hence the default operation will not gather this data, unless specified by the user.
+
+	'''
 	## Clustering:
 	objDBSCAN = DBSCAN_Cluters(eps=0.1, min_samples=19, metric='euclidean')
-	objDBSCAN.set_data(dataIN)
+	objDBSCAN.set_data(dataScaled)
 	clusterLabels = objDBSCAN.fit_predict()
-	clusters = np.unique(clusterLabels)
+	clusterUnqLabels = np.unique(clusterLabels)
 	print ('The shape of cluster labels: ', clusterLabels.shape)
-	print ('Clusters are: ', np.unique(clusters))
-
-
-	## Add the cluster column to the dataframe:
-	chicagoCrimeNew = chicagoCrime[['lonUTM','latUTM']]
-	chicagoCrimeNew['clusterNo'] = clusterLabels
-
+	print ('Unique Clusters Labels are: ', np.unique(clusterUnqLabels))
 
 	## Analysis:
 	cluster_groupByDF = objDBSCAN.cluster_info(clusterLabels)
-	# print (cluster_groupByDF.head())
-
-	return clusters, cluster_groupByDF
+	
+	if how_many != None:
+		if how_many > len(clusterUnqLabels):
+			raise ValueError("Can't fulfil Request : Number of Top Cluster requested = %s, Number of clusters created = %s"%(str(how_many),str(len(clusterUnqLabels))))
+		topClusterIndices_Dict = objDBSCAN.get_topClusters(clusterLabels=clusterLabels, how_many=how_many)
+		return clusterLabels, cluster_groupByDF, topClusterIndices_Dict
+	else:
+		return clusterLabels, cluster_groupByDF
 
 
 ##################### Main Call
@@ -84,7 +94,13 @@ if __main__:
 	chicagoCrime = dataBuilder(chicago_crm_pointsDir)
 	# print (chicagoCrime.head())
 	dataUTM_scaled = dataPrep(chicagoCrime, sparseNeighbor=False)
-	clusters, cluster_groupByDF = dataCluster(dataUTM_scaled)
+	clusterLabels, cluster_groupByDF = densityClusterBuilder(dataUTM_scaled, how_many=None)
 	print (cluster_groupByDF.head())
+
+	# ## Add the cluster column to the dataframe:
+	# chicagoCrimeNew = chicagoCrime[['lonUTM','latUTM']]
+	# chicagoCrimeNew['clusterNo'] = clusterLabels
+
+	# print (chicagoCrimeNew.head())
 
 
