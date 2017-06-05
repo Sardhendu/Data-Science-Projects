@@ -57,7 +57,7 @@ def dataPrep(chicagoCrime, sparseNeighbor=False):
 
 ###################### Clustering with DBSCAN
 ###################### Find Top Clusters (Individual Clusters)
-def densityClusterBuilder(dataIN, eps, k, distanceMetric='euclidean', how_many=None, singleClusters=False):
+def densityClusterBuilder(dataIN, eps, minSamples, distanceMetric='euclidean', how_many=None, singleClusters=False):
 	'''
 		Input: 
 			1. dataIN: The Scaled Data.
@@ -70,7 +70,7 @@ def densityClusterBuilder(dataIN, eps, k, distanceMetric='euclidean', how_many=N
 
 	'''
 	## Clustering:
-	objDBSCAN = DBSCAN_Cluters(eps=eps, min_samples=k, metric=distanceMetric)
+	objDBSCAN = DBSCAN_Cluters(eps=eps, min_samples=minSamples, metric=distanceMetric)
 	objDBSCAN.set_data(dataIN)
 	clusterLabels = objDBSCAN.fit_predict()
 	clusterUnqLabels = np.unique(clusterLabels)

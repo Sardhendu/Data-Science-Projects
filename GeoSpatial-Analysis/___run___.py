@@ -2,7 +2,7 @@
 from main import dataBuilder, dataPrep, densityClusterBuilder, getCluster_Area
 
 minDistance = 0.1
-k = 19
+minSamples = 19
 distanceMetric = 'euclidean'
 how_many = 5
 singleClusters = False
@@ -26,7 +26,7 @@ if __main__:
 		cluster_groupByDF, 
 		topClusterIndices_Dict) = densityClusterBuilder(dataIN=dataUTM_scaled, 
 											eps=minDistance,
-											k=k,
+											minSamples=minSamples,
 											distanceMetric=distanceMetric,
 											how_many=how_many, 
 											singleClusters=singleClusters

@@ -1,10 +1,11 @@
 
 1. Tuning Parameters:
-		k (min_sample) -> Nearest Neighbors
-		eps -> The Maximum distance between two points
-		metric -> Euclidean, precomputed, Haversine
+
+		minSamples (k) -> num of Nearest Neighbors
+		minDistance (eps) -> The Maximum distance between two points
+		mdistanceMetric (metric)-> Euclidean, precomputed, Haversine
 
 		single_clusters --> False, True : While performing density Clustering the value "True" would remove all points that are a single cluster (only one point in the cluster) , possible outliers
-		how_many = 6
+		how_many = How many Top dense clusters to extract
 
 		alpha --> deafualt = 2.5 (The concave hull alpha shape)
