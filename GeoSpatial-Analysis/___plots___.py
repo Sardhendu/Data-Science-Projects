@@ -1,7 +1,7 @@
 
 import numpy as np
 from Plots import Plot
-from ___main___ import dataBuilder, dataPrep, densityClusterBuilder
+from main import dataBuilder, dataPrep, densityClusterBuilder
 
 ################## Density plots
 
@@ -74,7 +74,7 @@ def topClusterPlot(dataIN, list_of_topClustersDF, how_many=4):#dataIN, clusterLa
 density_plot = True
 cluster_plot = True
 top_cluster_plot = True
-how_many_top_clusters = 6
+how_many = 6
 
 if density_plot:
 	chicago_crm_pointsDir = '/Users/sam/All-Program/App-DataSet/Study/GeoSpatial-Analysis/Crimes2015_NA_rmv_sampl.csv'
@@ -84,7 +84,7 @@ if density_plot:
 if density_plot and cluster_plot:
 	# print (chicagoCrime.head())
 	dataUTM_scaled = dataPrep(chicagoCrime, sparseNeighbor=False)
-	clusterLabels, cluster_groupByDF, topClusterIndices_Dict = densityClusterBuilder(dataUTM_scaled, how_many=how_many_top_clusters)
+	clusterLabels, cluster_groupByDF, topClusterIndices_Dict = densityClusterBuilder(dataUTM_scaled, how_many=how_many)
 	print (clusterLabels)
 
 	# Plot the cluster density plot
@@ -97,6 +97,7 @@ if density_plot and cluster_plot:
 	if top_cluster_plot:
 		list_of_topClustersDF = []
 
-		for num in np.arange(how_many_top_clusters): 
-			list_of_topClustersDF.append(chicagoCrimeNew.iloc[[values for key, values in topClusterIndices_Dict[num].items()][0],:])
-		topClusterPlot(chicagoCrimeNew, list_of_topClustersDF, how_many=how_many_top_clusters)
+		for num, (key, value) in enumerate(topClusterIndices_Dict.items()):
+			list_of_topClustersDF.append(chicagoCrimeNew.iloc[topClusterIndices_Dict[key],:])
+			if num+1 == how_many: break
+		topClusterPlot(chicagoCrimeNew, list_of_topClustersDF, how_many=how_many)

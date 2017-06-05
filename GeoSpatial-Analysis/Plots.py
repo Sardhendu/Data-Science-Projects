@@ -6,6 +6,7 @@ import itertools
 from copy import deepcopy
 import numpy as np
 import pandas as pd
+import geopandas as gpd
 
 
 # Plotting Libraries
@@ -92,10 +93,12 @@ class GeoPlot():
             self.basePlot = self.dataIN.plot(ax=self.ax, color=color)
             
     def add_plot(self, dataIN):
+        dataIN = pd.DataFrame({'x':dataIN.iloc[:,0], 'y':dataIN.iloc[:,1]})
         if self.newPlot == None:
-            self.newPlot = dataIN.plot(ax=self.basePlot, marker='o', color='red', markersize=7)
+            self.newPlot = dataIN.plot(x='x', y='y', kind='scatter', ax=self.basePlot, color='red')
         else:
-            self.newPlot = dataIN.plot(ax=self.newPlot, marker='o', color='red', markersize=7)       
+            # When plotting the third layer
+            self.newPlot = dataIN.plot(x='x', y='y', kind='scatter', ax=self.newPlot, color='red')       
 
 
 

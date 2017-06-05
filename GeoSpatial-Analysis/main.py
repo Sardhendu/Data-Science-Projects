@@ -1,9 +1,11 @@
 import pandas as pd
 import numpy as np
+from collections import OrderedDict
+
 
 # Packages:
 from SpatialHandlers import SpatialHandler
-from Tools import Operations
+from Tools import Operations, polygonArea
 from Clusters import DBSCAN_Cluters
 
 
@@ -55,10 +57,10 @@ def dataPrep(chicagoCrime, sparseNeighbor=False):
 
 ###################### Clustering with DBSCAN
 ###################### Find Top Clusters (Individual Clusters)
-def densityClusterBuilder(dataScaled, how_many = None):
+def densityClusterBuilder(dataIN, eps, k, distanceMetric='euclidean', how_many=None, singleClusters=False):
 	'''
 		Input: 
-			1. dataScaled: The Scaled Data.
+			1. dataIN: The Scaled Data.
 			2. how_many: retrieve how many top clusters
 
 		Output:
@@ -68,8 +70,8 @@ def densityClusterBuilder(dataScaled, how_many = None):
 
 	'''
 	## Clustering:
-	objDBSCAN = DBSCAN_Cluters(eps=0.1, min_samples=19, metric='euclidean')
-	objDBSCAN.set_data(dataScaled)
+	objDBSCAN = DBSCAN_Cluters(eps=eps, min_samples=k, metric=distanceMetric)
+	objDBSCAN.set_data(dataIN)
 	clusterLabels = objDBSCAN.fit_predict()
 	clusterUnqLabels = np.unique(clusterLabels)
 	print ('The shape of cluster labels: ', clusterLabels.shape)
@@ -81,26 +83,15 @@ def densityClusterBuilder(dataScaled, how_many = None):
 	if how_many != None:
 		if how_many > len(clusterUnqLabels):
 			raise ValueError("Can't fulfil Request : Number of Top Cluster requested = %s, Number of clusters created = %s"%(str(how_many),str(len(clusterUnqLabels))))
-		topClusterIndices_Dict = objDBSCAN.get_topClusters(clusterLabels=clusterLabels, how_many=how_many)
+		topClusterIndices_Dict = objDBSCAN.get_topClusters(clusterLabels=clusterLabels, how_many=how_many, singleClusters=singleClusters)
 		return clusterLabels, cluster_groupByDF, topClusterIndices_Dict
 	else:
 		return clusterLabels, cluster_groupByDF
 
 
-##################### Main Call
-__main__ = True
-if __main__:
-	chicago_crm_pointsDir = '/Users/sam/All-Program/App-DataSet/Study/GeoSpatial-Analysis/Crimes2015_NA_rmv_sampl.csv'
-	chicagoCrime = dataBuilder(chicago_crm_pointsDir)
-	# print (chicagoCrime.head())
-	dataUTM_scaled = dataPrep(chicagoCrime, sparseNeighbor=False)
-	clusterLabels, cluster_groupByDF = densityClusterBuilder(dataUTM_scaled, how_many=None)
-	print (cluster_groupByDF.head())
-
-	# ## Add the cluster column to the dataframe:
-	# chicagoCrimeNew = chicagoCrime[['lonUTM','latUTM']]
-	# chicagoCrimeNew['clusterNo'] = clusterLabels
-
-	# print (chicagoCrimeNew.head())
-
+def getCluster_Area(dataIN, topClusterIndices_Dict, alpha):
+	clusterArea = OrderedDict()
+	for key, values in topClusterIndices_Dict.items():
+		clusterArea[key] = polygonArea().alpha_shape(dataIN[values,:],alpha=alpha)
+	return clusterArea
 

@@ -7,6 +7,7 @@ import itertools
 from copy import deepcopy
 import numpy as np
 import pandas as pd
+from collections import defaultdict, OrderedDict
 
 
 # Clustering Libraries
@@ -54,21 +55,26 @@ class DBSCAN_Cluters():
            .reset_index())
         return groupByDF
     
-    def get_topClusters(self, clusterLabels, cluster_groupByDF=[], how_many=1, single_clusters=False):
+    def get_topClusters(self, clusterLabels, cluster_groupByDF=[], how_many=1, singleClusters=False):
+        """
+            Returns the indices of top clusters,
+            Example topClusterIndices_Dict = {"0": [1,3,4,9,15,20,21], "4":[7,2,6,10,12]} 
+                this means that  0 is the biggest cluster and the coordinate points belonging the the cluster 0 can be
+                found by using the indices [1,3,4,9,15,20,21] form main DataFrame
+        """
         if not any(cluster_groupByDF):
             cluster_groupByDF = self.cluster_info(clusterLabels)
         
-        if not single_clusters:
+        if not singleClusters:
             cluster_groupByDF = cluster_groupByDF.loc[cluster_groupByDF['clusterNo'] != -1]
             
         clusterNo = np.array(cluster_groupByDF['clusterNo'])
         
-        topClusterIndices_Dict = {}
+        topClusterIndices_Dict = OrderedDict() # Use OderedDict, because it rememebrs the order data were inserted 
         for num, clstr_no in enumerate(clusterNo):
             if num == how_many:
                 break
             indices = np.where(clusterLabels == clstr_no)[0]
-            topClusterIndices_Dict[num] = {str(clstr_no):indices}
+            topClusterIndices_Dict[clstr_no] = indices
     
         return topClusterIndices_Dict
-    # Now we fit the data and cluster the data.
