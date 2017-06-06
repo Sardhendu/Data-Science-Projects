@@ -9,38 +9,74 @@ from Tools import Operations, polygonArea
 from Clusters import DBSCAN_Cluters
 
 
+#################### Data Cleaner
+
+def dataCleaner(dataIN):
+	# Quickly loop through the entire dataset and remove bad entries.
+	'''
+		1. Remove entries with latitue or longitude values as 0
+		2. Remove entries with latitude or longitude that have 3 or less than three decimal points, because 
+			they will not add much knowledge to pin pointing the location
+
+		Note: To Confirm 
+
+		42.737000 is treated as 42.737 and since 42.737 has only three digits after the decimal points, this is removed form the list
+	'''
+	# dataIN_copy = dataIN.copy(deep=True)
+	dataIN = dataIN.reset_index()
+	badDataIndices = [num for num, (lat,lon) in enumerate(zip(dataIN['Latitude'], dataIN['Longitude'])) if lat == 0 or lon == 0 or str(lat)[::-1].find('.') <= 3 or str(lon)[::-1].find('.') <= 3]
+
+	# print (len(dataIN))
+	print (badDataIndices)
+
+	if len(badDataIndices) != len(set(badDataIndices)):
+		raise ValueError('Few Indices repeat multiple times')
+
+	cleanedData = dataIN.loc[~dataIN.index.isin(badDataIndices)]
+
+	if len(cleanedData) + len(badDataIndices) != len(dataIN):
+		print ('')
+		print (len(dataIN))
+		print (len(cleanedData))
+		print (len(badDataIndices))
+		raise ValueError('The length of badData and Clean data should equal the lenght of total input data')
+
+	return cleanedData
+
+
+
 #################### Initial Dataset Builder and Data Preparer
 
-def dataBuilder(dataDIR):
-	chicagoCrime = pd.read_csv(dataDIR)
-
-	# Renaming Dataset:
-	chicagoCrime = chicagoCrime[['Longitude', 'Latitude']]
-	# chicagoCrime.head()
-	# chicagoCrime.describe()
-
+def dataBuilder(dataIN):
 	# # Spatial Handler
 	objSpHandler = SpatialHandler()
-	objSpHandler.set_data(chicagoCrime)
+	objSpHandler.set_data(dataIN)
 	kwargs = {'to_UTM':True, 'to_GeoPoints':['UTM', 'LonLat']}
 	(utmProj, geomPoints_UTM, geomPoints_LonLat) =  objSpHandler.transform_toUTM('Longitude', 'Latitude', **kwargs)
 
 	# Now we add the columns to the DataFrame
-	chicagoCrime['lonUTM'] = utmProj[:,0]
-	chicagoCrime['latUTM'] = utmProj[:,1]
-	chicagoCrime['geometryUTM'] = geomPoints_UTM
-	chicagoCrime['geometryLonLat'] = geomPoints_LonLat
+	dataIN['lonUTM'] = utmProj[:,0]
+	dataIN['latUTM'] = utmProj[:,1]
+	dataIN['geometryUTM'] = geomPoints_UTM
+	dataIN['geometryLonLat'] = geomPoints_LonLat
 
+	############
+	# The below produces error because some of the latitude and longitude points becomes high degree of floating point such as POINT (-84.40524000000001 42.770348). Hence we have to handle this scenario  
+	############
 	# We would also like to add a colum with a different Mercetor projection
-	objSpHandler.set_data(chicagoCrime)
-	geomPointsMerc = objSpHandler.transform_toMerc('geometryLonLat', epsg=3857)
-	chicagoCrime['geometryMerc'] = geomPointsMerc
+	# objSpHandler.set_data(dataIN)
+	# geomPointsMerc = objSpHandler.transform_toMerc(column_LonLat='geometryLonLat', 
+	# 												dataIN=dataIN,
+	# 												epsg=3857
+	# 											)
+	# dataIN['geometryMerc'] = geomPointsMerc
 
-	return chicagoCrime
+	return dataIN
+
 
 # Prepare DataSet
-def dataPrep(chicagoCrime, sparseNeighbor=False):
-	dataOUT = np.array(chicagoCrime[['lonUTM','latUTM']])#[[0,0], [2,0], [0,2]]#[[0., 0., 0.], [0., .5, 0.], [1., 1., .5]]
+def dataPrep(dataIN, sparseNeighbor=False):
+	dataOUT = np.array(dataIN[['lonUTM','latUTM']])#[[0,0], [2,0], [0,2]]#[[0., 0., 0.], [0., .5, 0.], [1., 1., .5]]
 	dataOUT = Operations().standarize(dataOUT)#(dataIN-np.mean(dataIN, axis=0))/np.std(dataIN, axis=0)
 	print ('The shape of input data is: ', dataOUT.shape)
 

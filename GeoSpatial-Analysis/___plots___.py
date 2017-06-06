@@ -1,7 +1,9 @@
 
+import random
 import numpy as np
+import pandas as pd
 from Plots import Plot
-from main import dataBuilder, dataPrep, densityClusterBuilder
+from main import dataCleaner, dataBuilder, dataPrep, densityClusterBuilder
 
 ################## Density plots
 
@@ -71,27 +73,57 @@ def topClusterPlot(dataIN, list_of_topClustersDF, how_many=4):#dataIN, clusterLa
 
 
 
+
+
 density_plot = True
 cluster_plot = True
 top_cluster_plot = True
-how_many = 6
+
+minDistance = 0.1
+minSamples = 6
+distanceMetric = 'euclidean'
+how_many = 5
+singleClusters = False
+apha = 2.5
+
+random.seed(78672)
+
+UM_LatLon_dir = '/Users/sam/All-Program/App-DataSet/Data-Science-Projects/Geo-Spatial-Analysis/UM_transactions_devices.csv'
+
+locationData = pd.read_csv(UM_LatLon_dir,  header=None)
+locationData.columns = ['deviceID', 'Latitude', 'Longitude', 'timeStanp']
+
+unqdeviceID = np.unique(locationData['deviceID'])
+random.shuffle(unqdeviceID)
+
+
+locationData = locationData.loc[locationData['deviceID'] == unqdeviceID[199]]
+cleanData = dataCleaner(locationData).reset_index()
 
 if density_plot:
-	chicago_crm_pointsDir = '/Users/sam/All-Program/App-DataSet/Study/GeoSpatial-Analysis/Crimes2015_NA_rmv_sampl.csv'
-	chicagoCrime = dataBuilder(chicago_crm_pointsDir)
-	densityPlot(chicagoCrime)
+	spatialData = dataBuilder(cleanData)
+	densityPlot(spatialData)
 
 if density_plot and cluster_plot:
 	# print (chicagoCrime.head())
-	dataUTM_scaled = dataPrep(chicagoCrime, sparseNeighbor=False)
-	clusterLabels, cluster_groupByDF, topClusterIndices_Dict = densityClusterBuilder(dataUTM_scaled, how_many=how_many)
+	dataUTM_scaled = dataPrep(spatialData, sparseNeighbor=False)
+	# clusterLabels, cluster_groupByDF, topClusterIndices_Dict = densityClusterBuilder(dataUTM_scaled, how_many=how_many)
+
+	clusterLabels, cluster_groupByDF, topClusterIndices_Dict = densityClusterBuilder(dataIN=dataUTM_scaled, 
+											eps=minDistance,
+											minSamples=minSamples,
+											distanceMetric=distanceMetric,
+											how_many=how_many, 
+											singleClusters=singleClusters
+										)
+
 	print (clusterLabels)
 
 	# Plot the cluster density plot
 	densityClusterPlot(dataUTM_scaled, clusterLabels)
 
 	## Add the cluster column to the dataframe:
-	chicagoCrimeNew = chicagoCrime[['lonUTM','latUTM']]
+	chicagoCrimeNew = spatialData[['lonUTM','latUTM']]
 	chicagoCrimeNew['clusterNo'] = clusterLabels
 
 	if top_cluster_plot:

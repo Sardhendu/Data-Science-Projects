@@ -64,9 +64,9 @@ class SpatialHandler():
     def transform_toMerc(self, column_LonLat, dataIN=[], epsg=3395):
         if any(dataIN):
             self.dataIN = dataIN
-            
+
         self.dataIN = self.dataIN.set_geometry(column_LonLat)
-        
+
         LonLat = self.dataIN[column_LonLat]
         LonLat.crs = {'init': 'epsg:4326'}       ## Initialize the current column as espg:4326 for further conversion
         epsgStr = 'epsg:'+str(epsg)
