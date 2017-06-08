@@ -1,36 +1,36 @@
-
 import random
 import numpy as np
 import pandas as pd
 from Plots import Plot
+import DataGenerator
 from main import dataCleaner, dataBuilder, dataPrep, densityClusterBuilder
 
 ################## Density plots
 
 def densityPlot(datIN):
-	obj_plot = Plot()
-	obj_plot.set_figure(2,2, 1200,1500)
+    obj_plot = Plot()
+    obj_plot.set_figure(2,2, 1200,1500)
 
-	# plot1
-	obj_plot.set_config({'plot_type':'scatter', 'plot_mode':'markers', 'plot_name':'scatter_LonLat'})
-	obj_plot.base_plot(x=datIN['Longitude'], y=datIN['Latitude'])
+    # plot1
+    obj_plot.set_config({'plot_type':'scatter', 'plot_mode':'markers', 'plot_name':'scatter_LonLat'})
+    obj_plot.base_plot(x=datIN['Longitude'], y=datIN['Latitude'])
 
-	# plot2
-	obj_plot.set_config({'plot_type':'scatter', 'plot_mode':'markers', 'plot_name':'scatter_UTM'})
-	obj_plot.base_plot(x=datIN['lonUTM'], y=datIN['latUTM'])
+    # plot2
+    obj_plot.set_config({'plot_type':'scatter', 'plot_mode':'markers', 'plot_name':'scatter_UTM'})
+    obj_plot.base_plot(x=datIN['lonUTM'], y=datIN['latUTM'])
 
-	# plot3
-	obj_plot.set_config({'plot_type':'scatter', 'plot_mode':'markers', 'plot_name':'histogram2Dcontours-LonLat'})
-	obj_plot.base_plot(x=datIN['Longitude'], y=datIN['Latitude'])
-	obj_plot.set_config({'plot_type':'hist2Dcontour'})
-	obj_plot.add_plot(x=datIN['Longitude'], y=datIN['Latitude'])
+    # plot3
+    obj_plot.set_config({'plot_type':'scatter', 'plot_mode':'markers', 'plot_name':'histogram2Dcontours-LonLat'})
+    obj_plot.base_plot(x=datIN['Longitude'], y=datIN['Latitude'])
+    obj_plot.set_config({'plot_type':'hist2Dcontour'})
+    obj_plot.add_plot(x=datIN['Longitude'], y=datIN['Latitude'])
 
-	# plot4
-	obj_plot.set_config({'plot_type':'scatter', 'plot_mode':'markers', 'plot_name':'histogram2Dcontours-UTM'})
-	obj_plot.base_plot(x=datIN['lonUTM'], y=datIN['latUTM'])
-	obj_plot.set_config({'plot_type':'hist2Dcontour'})
-	obj_plot.add_plot(x=datIN['lonUTM'], y=datIN['latUTM'])
-	obj_plot.show(plotFileName='Histogram-2D-contour-Plot')
+    # plot4
+    obj_plot.set_config({'plot_type':'scatter', 'plot_mode':'markers', 'plot_name':'histogram2Dcontours-UTM'})
+    obj_plot.base_plot(x=datIN['lonUTM'], y=datIN['latUTM'])
+    obj_plot.set_config({'plot_type':'hist2Dcontour'})
+    obj_plot.add_plot(x=datIN['lonUTM'], y=datIN['latUTM'])
+    obj_plot.show(plotFileName='Histogram-2D-contour-Plot')
 
 
 
@@ -56,15 +56,15 @@ def topClusterPlot(dataIN, list_of_topClustersDF, how_many=4):#dataIN, clusterLa
 
 	for clusterNum, clusterPoints in enumerate(list_of_topClustersDF):
 			# Plot 1:
-		obj_plot.set_config(dict(plot_type='scatter', 
-			plot_mode='markers', 
-			plot_name='cluster'+str(clusterNum), 
+		obj_plot.set_config(dict(plot_type='scatter',
+			plot_mode='markers',
+			plot_name='cluster'+str(clusterNum),
 			marker_config=dict(size=4,opacity=0.3, color='black'))
 		)
 		obj_plot.base_plot(x=dataIN['lonUTM'], y=dataIN['latUTM'])
 
-		obj_plot.set_config(dict(plot_type='scatter', 
-			plot_mode='markers', 
+		obj_plot.set_config(dict(plot_type='scatter',
+			plot_mode='markers',
 			marker_config=dict(size=4,opacity=0.3, color='blue'))
 		)
 		obj_plot.add_plot(x=clusterPoints['lonUTM'], y=clusterPoints['latUTM'])
@@ -82,23 +82,17 @@ top_cluster_plot = True
 minDistance = 0.1
 minSamples = 6
 distanceMetric = 'euclidean'
-how_many = 5
+how_many = 4
 singleClusters = False
 apha = 2.5
 
-random.seed(78672)
 
-UM_LatLon_dir = '/Users/sam/All-Program/App-DataSet/Data-Science-Projects/Geo-Spatial-Analysis/UM_transactions_devices.csv'
+deviceID = None
+indexNum=99
+num_rand_data=1
 
-locationData = pd.read_csv(UM_LatLon_dir,  header=None)
-locationData.columns = ['deviceID', 'Latitude', 'Longitude', 'timeStanp']
-
-unqdeviceID = np.unique(locationData['deviceID'])
-random.shuffle(unqdeviceID)
-
-
-locationData = locationData.loc[locationData['deviceID'] == unqdeviceID[199]]
-cleanData = dataCleaner(locationData).reset_index()
+deviceLocationData = DataGenerator.generateData(indexNum=indexNum)
+cleanData = dataCleaner(deviceLocationData).reset_index()
 
 if density_plot:
 	spatialData = dataBuilder(cleanData)
@@ -109,11 +103,11 @@ if density_plot and cluster_plot:
 	dataUTM_scaled = dataPrep(spatialData, sparseNeighbor=False)
 	# clusterLabels, cluster_groupByDF, topClusterIndices_Dict = densityClusterBuilder(dataUTM_scaled, how_many=how_many)
 
-	clusterLabels, cluster_groupByDF, topClusterIndices_Dict = densityClusterBuilder(dataIN=dataUTM_scaled, 
+	clusterLabels, cluster_groupByDF, topClusterIndices_Dict = densityClusterBuilder(dataIN=dataUTM_scaled,
 											eps=minDistance,
 											minSamples=minSamples,
 											distanceMetric=distanceMetric,
-											how_many=how_many, 
+											how_many=how_many,
 											singleClusters=singleClusters
 										)
 
