@@ -24,7 +24,15 @@ Contains several data science projects.
 			3. Decision Trees
 			4. Random Forests
 	
-	2. Crime Prediction: {Python: Sckit-learn}
+	2. Crime Card Fraud Detection: {Python: Sckit-learn} (Working now)
+		Models:
+			1. Random Forest
+			2. Gradient Boosting
+			3. XGBoost
+			4. Neural Nets
+			5. Autoencoders  
+			
+	3. Crime Prediction: {Python: Sckit-learn}
 		Regression:
 			1. Linear Regression
 			2. Polynomial Regression
@@ -35,12 +43,12 @@ Contains several data science projects.
 			3. Support Vector Machines, Linear SVC, POLY, RBF
 			4. Random Forests
 
-	3. Diabetic-Readmission Analysis: {PySpark, R}
+	4. Diabetic-Readmission Analysis: {PySpark, R}
 		Classification:
 			1. GLM {RIDGE/LASSO/ELNET}
 			2. Random Forests
 
-	4. Loan Default: {R}
+	5. Loan Default: {R}
 		Classification:
 			1.  GLM (Generalized Linear Model)
 
