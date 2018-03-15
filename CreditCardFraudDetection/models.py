@@ -29,6 +29,7 @@ class Score():
         ''' tp / (tp+fp) '''
         if reverse:
             y_true = 1 - y_true
+            y_pred = 1 - y_pred
         return metrics.precision_score(y_true, y_pred)
     
     @staticmethod
