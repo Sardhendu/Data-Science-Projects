@@ -1,16 +1,13 @@
 from __future__ import division, print_function, absolute_import
-import xgboost
-
 import warnings
-
-
 import numpy as np
 import pandas as pd
+import xgboost
 from imblearn.over_sampling import SMOTE
-
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from CreditCardFraudDetection.utils import unison_shuffled_copies
+
+from utils import unison_shuffled_copies
 
 # records_per_label_per_batch =
 # batch_size_per_class = 512

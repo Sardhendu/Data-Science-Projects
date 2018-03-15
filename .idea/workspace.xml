@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f44b8bae-4a94-4ba7-a4dc-46e7a722ad98" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/.ipynb_checkpoints/Vizualization-Copy1-checkpoint.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/.ipynb_checkpoints/Vizualization-checkpoint.ipynb" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Data-Science-Projects.iml" afterPath="$PROJECT_DIR$/.idea/Data-Science-Projects.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/logfile.log" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/Vizualization-Copy1.ipynb" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/Vizualization-Copy1.ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/.ipynb_checkpoints/model_evaluate-checkpoint.ipynb" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/.ipynb_checkpoints/model_evaluate-checkpoint.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/model_evaluate.ipynb" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/model_evaluate.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/nnet.py" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/nnet.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/plots.py" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/plots.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,7 +32,7 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="185">
+              <first_editor relative-caret-position="0">
                 <caret line="15" column="23" lean-forward="false" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
                 <folding />
               </first_editor>
@@ -45,7 +44,7 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
+            <state relative-caret-position="4280">
               <caret line="209" column="25" lean-forward="false" selection-start-line="209" selection-start-column="25" selection-end-line="209" selection-end-column="25" />
               <folding>
                 <element signature="e#0#79#0" expanded="true" />
@@ -57,8 +56,18 @@
       <file leaf-file-name="data_prep.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2065">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state relative-caret-position="160">
+              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="nnet.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/nnet.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1193">
+              <caret line="238" column="23" lean-forward="false" selection-start-line="238" selection-start-column="12" selection-end-line="238" selection-end-column="23" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
               </folding>
@@ -66,13 +75,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nnet.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/nnet.py">
+      <file leaf-file-name="logfile.log" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/logfile.log">
+          <provider selected="true" editor-type-id="LogFileEditorProvider">
+            <state relative-caret-position="528">
+              <caret line="69" column="48" lean-forward="true" selection-start-line="69" selection-start-column="48" selection-end-line="69" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plots.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/plots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="25" column="57" lean-forward="true" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
+            <state relative-caret-position="-347">
+              <caret line="8" column="24" lean-forward="true" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
               <folding>
-                <element signature="e#0#64#0" expanded="true" />
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -81,8 +99,8 @@
       <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="8" column="30" lean-forward="false" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
+            <state relative-caret-position="400">
+              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -102,8 +120,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>clusterInfo</find>
-      <find>chicagoCrimeNew</find>
       <find>time</find>
       <find>minNumClusters</find>
       <find>numTopClusters</find>
@@ -132,6 +148,8 @@
       <find>probs</find>
       <find>batch_size</find>
       <find>model</find>
+      <find>fc_layers</find>
+      <find>cv_loss_arr</find>
     </findStrings>
     <replaceStrings>
       <replace>minNumClusters</replace>
@@ -165,18 +183,20 @@
         <option value="$PROJECT_DIR$/GeoSpatial-Analysis/mainPlots.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/CreditCardFraudDetection/models.py" />
-        <option value="$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py" />
         <option value="$PROJECT_DIR$/CreditCardFraudDetection/utils.py" />
         <option value="$PROJECT_DIR$/CreditCardFraudDetection/model_evaluate.ipynb" />
-        <option value="$PROJECT_DIR$/CreditCardFraudDetection/logfile.log" />
+        <option value="$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py" />
+        <option value="$PROJECT_DIR$/CreditCardFraudDetection/plots.py" />
         <option value="$PROJECT_DIR$/CreditCardFraudDetection/nnet.py" />
+        <option value="$PROJECT_DIR$/CreditCardFraudDetection/logfile.log" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="y" value="23" />
-    <option name="width" value="1280" />
-    <option name="height" value="877" />
+    <option name="x" value="-2560" />
+    <option name="y" value="-191" />
+    <option name="width" value="2560" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -215,7 +235,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
+      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <expand>
@@ -232,7 +252,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -474,15 +494,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="-2560" y="-191" width="2560" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12875536" sideWeight="0.842711" order="2" side_tool="false" content_ui="combo" x="332" y="23" width="291" height="877" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.090150915" sideWeight="0.842711" order="2" side_tool="false" content_ui="combo" x="332" y="23" width="291" height="877" />
       <window_info id="TODO" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904148" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32943925" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3040057" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2167382" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="511" y="19" width="449" height="900" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7052933" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46028593" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.4960182" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3590844" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2079646" sideWeight="0.157289" order="1" side_tool="true" content_ui="tabs" />
@@ -511,7 +531,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/GeoSpatial-Analysis/DataGenerator.py" />
     <entry file="file://$PROJECT_DIR$/GeoSpatial-Analysis/Tools.py" />
     <entry file="file://$PROJECT_DIR$/GeoSpatial-Analysis/___run___.py" />
     <entry file="file://$PROJECT_DIR$/GeoSpatial-Analysis/DataGenerator.py" />
@@ -573,18 +592,18 @@
     <entry file="file://$PROJECT_DIR$/GeoSpatial-Analysis/Estimated_VS_actualPoint_UTM-Plot.html" />
     <entry file="file://$PROJECT_DIR$/GeoSpatial-Analysis/Clusters.py" />
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="185">
+          <first_editor relative-caret-position="0">
             <caret line="15" column="23" lean-forward="false" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
             <folding />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -592,37 +611,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
           <caret line="2" column="48" lean-forward="true" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="209" column="25" lean-forward="false" selection-start-line="209" selection-start-column="25" selection-end-line="209" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#79#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2065">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="30" lean-forward="false" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -633,20 +621,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/logfile.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="40">
-          <caret line="2" column="46" lean-forward="false" selection-start-line="2" selection-start-column="46" selection-end-line="2" selection-end-column="46" />
+    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4280">
+          <caret line="209" column="25" lean-forward="false" selection-start-line="209" selection-start-column="25" selection-end-line="209" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#79#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/nnet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="25" column="57" lean-forward="true" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
+        <state relative-caret-position="1193">
+          <caret line="238" column="23" lean-forward="false" selection-start-line="238" selection-start-column="12" selection-end-line="238" selection-end-column="23" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/plots.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-347">
+          <caret line="8" column="24" lean-forward="true" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/logfile.log">
+      <provider selected="true" editor-type-id="LogFileEditorProvider">
+        <state relative-caret-position="528">
+          <caret line="69" column="48" lean-forward="true" selection-start-line="69" selection-start-column="48" selection-end-line="69" selection-end-column="48" />
         </state>
       </provider>
     </entry>

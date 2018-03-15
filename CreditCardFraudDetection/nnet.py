@@ -1,15 +1,13 @@
 from __future__ import division, print_function, absolute_import
-
-
 import warnings
-from CreditCardFraudDetection.models import Score
 warnings.filterwarnings('ignore', category=DeprecationWarning, append=True)
-
 import logging
 import numpy as np
 import tensorflow as tf
+
 import data_prep
-from CreditCardFraudDetection.utils import to_one_hot
+from utils import to_one_hot
+from models import Score
 
 
 logging.basicConfig(level=logging.DEBUG, filename="logfile.log", filemode="w",
@@ -51,7 +49,7 @@ def fc_layers(X, inp, out, seed, name):
                             initializer=tf.constant_initializer(1.0),
                             name='b')
 
-    return tf.matmul(X, w) + b
+    return w, tf.matmul(X, w) + b
    
 def activation(X, name):
     X = tf.nn.tanh(X, name=name)
@@ -66,22 +64,19 @@ def accuracy(labels, logits, type='training', add_smry=True):
     return acc
     
 
-def model(layers):
+def model(layers, learning_rate, lamda, regularize):
     inpX = tf.placeholder(dtype=tf.float32, shape=[None, 29])
     inpY = tf.placeholder(dtype=tf.float32, shape=[None, 2])
     is_training = tf.placeholder(tf.bool)
     
-    
-    
     # print(inpX.get_shape().as_list()[-1], layers[0])
-    X = fc_layers(inpX, inp=inpX.get_shape().as_list()[-1], out=layers[0], seed=284, name='layer_1')
+    w1, X = fc_layers(inpX, inp=inpX.get_shape().as_list()[-1], out=layers[0], seed=284, name='layer_1')
     X = activation(X, name='tanh_1')
-    X = fc_layers(X, inp=X.get_shape().as_list()[-1], out=layers[1], seed=873, name='layer_2')
+    w2, X = fc_layers(X, inp=X.get_shape().as_list()[-1], out=layers[1], seed=873, name='layer_2')
     X = activation(X, name='tanh_2')
-    X = fc_layers(X, inp=X.get_shape().as_list()[-1], out=layers[2], seed=776, name='layer_3')
+    w3, X = fc_layers(X, inp=X.get_shape().as_list()[-1], out=layers[2], seed=776, name='layer_3')
     X = activation(X, name='tanh_3')
-    
-    logits = fc_layers(X, inp=X.get_shape().as_list()[-1], out=layers[3], seed=651, name='layer_4')
+    w4, logits = fc_layers(X, inp=X.get_shape().as_list()[-1], out=layers[3], seed=651, name='layer_4')
     probs = tf.nn.softmax(logits, name='softmax')
 
     acc = tf.cond(is_training,
@@ -91,6 +86,11 @@ def model(layers):
     
     with tf.variable_scope("Loss"):
         lossCE = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=inpY))
+
+        if regularize:
+            logging.info('Adding Regularization with lambda (%s) to the Loss Function', str(lamda))
+            regularizers = tf.nn.l2_loss(w1) + tf.nn.l2_loss(w2) + tf.nn.l2_loss(w3) + tf.nn.l2_loss(w3)
+            lossCE = tf.reduce_mean(lossCE + lamda * regularizers)
         
     with tf.variable_scope("optimizer"):
         opt = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(lossCE)
@@ -102,8 +102,9 @@ def model(layers):
 
    
     
-def nnet(layers, batch_size, display_step, num_epochs, learning_rate):
-    computation_graph = model(layers)
+def nnet(layers, batch_size, display_step, num_epochs, learning_rate, lamda, regularize):
+    tf.reset_default_graph()
+    computation_graph = model(layers, learning_rate, lamda, regularize)
     # print (computation_graph)
 
     dataX, dataY, xFeatures, yLabel = data_prep.feature_transform()
@@ -201,9 +202,9 @@ def nnet(layers, batch_size, display_step, num_epochs, learning_rate):
                     tr_recall_arr += [t_recall_score]
 
                     cv_loss_arr += [v_loss]
-                    cv_acc_arr = [vacc]
-                    cv_precision_arr = [v_precsion_score]
-                    cv_recall_arr = [v_recall_score]
+                    cv_acc_arr += [vacc]
+                    cv_precision_arr += [v_precsion_score]
+                    cv_recall_arr += [v_recall_score]
                     
                     logging.info('EPOCH %s ..............................................' ,str(epoch))
 

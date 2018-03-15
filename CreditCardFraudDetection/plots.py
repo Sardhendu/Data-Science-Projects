@@ -2,8 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+sns.set_style("whitegrid")
+
+
 class Plot():
-    def __init__(self, rows=1, columns=1, fig_size=[20,20]):
+    def __init__(self, rows=1, columns=1, fig_size=[8, 8]):
         fig_size = tuple(fig_size)
         f, axs = plt.subplots(rows, columns, figsize=fig_size)
         self.axs_ind = 0
@@ -16,6 +19,7 @@ class Plot():
     def vizualize(self, data, colX, colY=None, label_col=None, viz_type='bar', params={}):
         '''
             params : title,
+            data should be a data frame
         '''
         if viz_type == 'hist':
             data = data.reset_index().drop('index', 1)
@@ -62,7 +66,19 @@ class Plot():
                         '%s %s' % (str(round((height / tot_cnt) * 100, 3)), str('%')),
                         ha="center")
         
-        self.axs_ind += 1
+        if viz_type == 'line':
+            ax = self.axs[self.axs_ind]
+            #             if 'title' in params:
+            #                 assert len(params['title']) == len(data.columns())
+            for col_names in data.columns:
+                ax.plot(np.array(data[col_names]))
+            
+            ax.legend(list(data.columns), loc=4)
+            
+            if 'title' in params:
+                ax.set_title(params['title'])
         
+        self.axs_ind += 1
+    
     def show(self):
         plt.show()
