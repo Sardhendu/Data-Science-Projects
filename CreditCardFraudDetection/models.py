@@ -44,8 +44,11 @@ class Score():
 
 
 class RandomForest():
-    def __init__(self):
-        self.clf_rf = RandomForestClassifier(n_estimators=1500, random_state=12)
+    def __init__(self, model_obj):
+        if model_obj:
+            self.clf_rf = model_obj
+        else:
+            self.clf_rf = RandomForestClassifier(n_estimators=1500, random_state=12)
         
     def fit(self, X, Y):
         self.clf_rf.fit(X, Y)
@@ -55,7 +58,7 @@ class RandomForest():
 
 
 class GradientBoosting():
-    def __init__(self):
+    def __init__(self, model_obj):
         '''
         Tree Based.
             1. max_feature: Number of feature to be consider while deciding each split
@@ -74,17 +77,20 @@ class GradientBoosting():
             3. subsample: Percentage of data used as a random sample. Generally 0.8 it preferred, but this is again tunable using CV
 
         '''
-        self.clf_gb = GradientBoostingClassifier(
-                learning_rate=0.005,
-                n_estimators=1500,              # how many trees start with 30 and go till 1000
-                max_depth=9,                    # 5-20 often a good choice
-                min_samples_split=1200,
-                min_samples_leaf=60,
-                subsample=0.85,
-                random_state=10,
-                max_features=7,
-                warm_start=True)
-    
+        if model_obj:
+            self.clf_gb = model_obj
+        else:
+            self.clf_gb = GradientBoostingClassifier(
+                    learning_rate=0.005,
+                    n_estimators=1500,              # how many trees start with 30 and go till 1000
+                    max_depth=9,                    # 5-20 often a good choice
+                    min_samples_split=1200,
+                    min_samples_leaf=60,
+                    subsample=0.85,
+                    random_state=10,
+                    max_features=7,
+                    warm_start=True)
+        
     def fit(self, X, Y):
         self.clf_gb.fit(X, Y)
     
@@ -93,7 +99,7 @@ class GradientBoosting():
         
  
 class XGBoost():
-    def __init__(self):
+    def __init__(self, model_obj):
         
         '''
         Credits:
@@ -138,19 +144,22 @@ class XGBoost():
         7. auc : area under curve
         
         '''
-
-        self.clf_xgb = XGBClassifier(
-                        learning_rate=0.1,
-                        n_estimators=10,
-                        max_depth=5,
-                        min_child_weight=1,
-                        gamma=0,
-                        subsample=0.8,
-                        colsample_bytree=0.8,
-                        objective='binary:logistic',
-                        nthread=4,
-                        scale_pos_weight=1,
-                        seed=27)
+        
+        if model_obj:
+            self.clf_xgb = model_obj
+        else:
+            self.clf_xgb = XGBClassifier(
+                            learning_rate=0.1,
+                            n_estimators=10,
+                            max_depth=5,
+                            min_child_weight=1,
+                            gamma=0,
+                            subsample=0.8,
+                            colsample_bytree=0.8,
+                            objective='binary:logistic',
+                            nthread=4,
+                            scale_pos_weight=1,
+                            seed=27)
         
     def fit(self, X, Y):
         self.clf_xgb.fit(X, Y)

@@ -14,22 +14,9 @@ logging.basicConfig(level=logging.DEBUG, filename="logfile.log", filemode="w",
                     format="%(asctime)-15s %(levelname)-8s %(message)s")
 
 
-
-'''
-To Do's :
-L2 Regularization
-Batch Normalization
-Learning Rate Decay
-
-Start the experiment with 1 hidden Layer and few nodes and then increase the
-number of hidden layer and layer nodes
+epsilon = 1e-3
 
 
-Baseline by https://uu.diva-portal.org/smash/get/diva2:1150344/FULLTEXT01.pdf
-4 Hidden layer with 20 nodes each
-Converges at epoch 200 and learning rate 0.005
-Batch size = 2048
-'''
 
 
 
@@ -55,6 +42,30 @@ def activation(X, name):
     X = tf.nn.tanh(X, name=name)
     return X
 
+def batch_norm(X, axes=[0], scope_name='batch_norm'):
+    numOUT = X.get_shape().as_list()[-1]
+    with tf.variable_scope(scope_name):
+        beta = tf.get_variable(
+                dtype='float32',
+                shape=[numOUT],
+                initializer=tf.constant_initializer(0.0),
+                name="b",  # offset (bias)
+                trainable=True
+        )
+        gamma = tf.get_variable(
+                dtype='float32',
+                shape=[numOUT],
+                initializer=tf.constant_initializer(1.0),
+                name="w",  # scale(weight)
+                trainable=True)
+        
+        batchMean, batchVar = tf.nn.moments(X, axes=axes, name="moments")  # the input format is [m,numOUT],
+        # and hence we just do the normalization across batches by taking axis as [0]
+    
+        norm = (X - batchMean) / tf.sqrt(batchVar + epsilon)  # Simply the formula for standarization
+        BN = gamma * norm + beta
+    return BN
+
 def accuracy(labels, logits, type='training', add_smry=True):
     with tf.name_scope("Accuracy"):
         pred = tf.equal(tf.argmax(logits, 1), tf.argmax(labels, 1))
@@ -71,11 +82,17 @@ def model(layers, learning_rate, lamda, regularize):
     
     # print(inpX.get_shape().as_list()[-1], layers[0])
     w1, X = fc_layers(inpX, inp=inpX.get_shape().as_list()[-1], out=layers[0], seed=284, name='layer_1')
+    # X = batch_norm(X, axes=[0], scope_name='bn_1')
     X = activation(X, name='tanh_1')
+    
     w2, X = fc_layers(X, inp=X.get_shape().as_list()[-1], out=layers[1], seed=873, name='layer_2')
+    # X = batch_norm(X, axes=[0], scope_name='bn_2')
     X = activation(X, name='tanh_2')
+    
     w3, X = fc_layers(X, inp=X.get_shape().as_list()[-1], out=layers[2], seed=776, name='layer_3')
+    # X = batch_norm(X, axes=[0], scope_name='bn_3')
     X = activation(X, name='tanh_3')
+    
     w4, logits = fc_layers(X, inp=X.get_shape().as_list()[-1], out=layers[3], seed=651, name='layer_4')
     probs = tf.nn.softmax(logits, name='softmax')
 
