@@ -2,26 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f44b8bae-4a94-4ba7-a4dc-46e7a722ad98" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Assignment-8-checkpoint.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ipynb_checkpoints/BigData-Assignment8-checkpoint.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ipynb_checkpoints/DiabeticReadmission-R-checkpoint.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ipynb_checkpoints/DiabeticReadmission-Spark-checkpoint.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Rough-Code-checkpoint.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ipynb_checkpoints/RoughCode-R-checkpoint.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Untitled1-checkpoint.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ipynb_checkpoints/crimePrediction-checkpoint.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/.ipynb_checkpoints/ROUGH-checkpoint.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/.ipynb_checkpoints/model_eval_boost-checkpoint.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/.ipynb_checkpoints/model_eval_deepL-Copy1-checkpoint.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/.ipynb_checkpoints/model_eval_deepL-checkpoint.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/logs/events.out.tfevents.1521330816.Sardhendus-MacBook-Pro.local" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/logs/events.out.tfevents.1521331461.Sardhendus-MacBook-Pro.local" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/model_eval_deepL-Copy1.ipynb" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/Vizualization.ipynb" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/Vizualization.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/logfile.log" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/logfile.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/model_eval_deepL.ipynb" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/model_eval_deepL.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/README.md" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/model_eval_boost.ipynb" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/model_eval_boost.ipynb" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -46,7 +29,7 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="-410">
-                <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="8" selection-end-column="17" />
+                <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="8" selection-end-column="17" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -58,8 +41,8 @@
         <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="480">
-                <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <first_editor relative-caret-position="780">
+                <caret line="20" column="131" lean-forward="false" selection-start-line="20" selection-start-column="131" selection-end-line="20" selection-end-column="131" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -71,7 +54,7 @@
         <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="295">
-              <caret line="153" column="0" lean-forward="true" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
+              <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
               </folding>
@@ -82,8 +65,8 @@
       <file leaf-file-name="autoencoders.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models/autoencoders.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="21" column="26" lean-forward="false" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <element signature="e#1#19#0" expanded="true" />
               </folding>
@@ -284,6 +267,12 @@
               <item name="Root" type="cbb8eebc:String" user="Root" />
               <item name="DataScienceProjects" type="cbb8eebc:String" user="DataScienceProjects" />
               <item name="CreditCardFraudDetection" type="cbb8eebc:String" user="CreditCardFraudDetection" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="DataScienceProjects" type="cbb8eebc:String" user="DataScienceProjects" />
+              <item name="CreditCardFraudDetection" type="cbb8eebc:String" user="CreditCardFraudDetection" />
+              <item name="models" type="cbb8eebc:String" user="models" />
             </path>
           </expand>
           <select />
@@ -537,8 +526,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16380544" sideWeight="0.842711" order="2" side_tool="false" content_ui="combo" x="332" y="23" width="291" height="877" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16380544" sideWeight="0.842711" order="2" side_tool="false" content_ui="combo" x="332" y="23" width="291" height="877" />
       <window_info id="TODO" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904148" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32943925" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3040057" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -572,7 +562,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/GeoSpatial-Analysis/___run___.py" />
     <entry file="file://$PROJECT_DIR$/GeoSpatial-Analysis/DataGenerator.py" />
     <entry file="file://$PROJECT_DIR$/GeoSpatial-Analysis/ValidateLocation.py" />
     <entry file="file://$PROJECT_DIR$/GeoSpatial-Analysis/Clusters.py" />
@@ -656,16 +645,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models/autoencoders.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="21" column="26" lean-forward="false" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
-          <folding>
-            <element signature="e#1#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
@@ -683,16 +662,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="153" column="0" lean-forward="true" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -702,7 +671,7 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="-410">
-            <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="8" selection-end-column="17" />
+            <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="8" selection-end-column="17" />
             <folding />
           </first_editor>
           <second_editor />
@@ -739,11 +708,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/model_eval_boost.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models/autoencoders.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="480">
-            <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <first_editor relative-caret-position="780">
+            <caret line="20" column="131" lean-forward="false" selection-start-line="20" selection-start-column="131" selection-end-line="20" selection-end-column="131" />
             <folding />
           </first_editor>
           <second_editor />
