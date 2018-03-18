@@ -6,6 +6,16 @@ The data set was initially posted in Kaggle, and can be found [HERE](https://git
 
 The data set contains 284807 records where 284315 are non-fraud transaction and 492. We have a typical class imbalance problem.
 
+
+### Data Prep:
+
+* Test Data: Comprises of 10% of the total data
+* Cross Validation: 10% of data left after removing test data
+* Training: The left out data is used for training.
+* The Fraud Transactions are upsampled only in the training data using SMOTE.
+* For Deep Neural Nets, the data is divided into batches. The size is varied for different runs and 2048 is taken to be a good size. 
+* Models are fit on the training data, parameters are adjusted using cross validation score and final performance is obtained using the test data. 
+
 ### Models
 
 1. [Random Forest, Gradient Boosting and XGBoost](https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/models/boosting.py): Boosting methods are quite famous since they work on random batches and weak classifiers. The parameters are not tuned extensively rather boosting methods are used as a bench mark.

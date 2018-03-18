@@ -39,8 +39,8 @@
         <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="320">
-                <caret line="10" column="241" lean-forward="true" selection-start-line="10" selection-start-column="241" selection-end-line="10" selection-end-column="241" />
+              <first_editor relative-caret-position="470">
+                <caret line="24" column="225" lean-forward="true" selection-start-line="24" selection-start-column="225" selection-end-line="24" selection-end-column="225" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -736,8 +736,8 @@
     <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="320">
-            <caret line="10" column="241" lean-forward="true" selection-start-line="10" selection-start-column="241" selection-end-line="10" selection-end-column="241" />
+          <first_editor relative-caret-position="470">
+            <caret line="24" column="225" lean-forward="true" selection-start-line="24" selection-start-column="225" selection-end-line="24" selection-end-column="225" />
             <folding />
           </first_editor>
           <second_editor />
