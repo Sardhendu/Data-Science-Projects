@@ -16,6 +16,6 @@ The data set contains 284807 records where 284315 are non-fraud transaction and 
 
     * [Model Evaluation on a differnt set of parameters](https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/model_eval_deepL.ipynb)
     
-     <img src="https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/images/Screen%20Shot%202018-03-18%20at%202.27.49%20AM.png" width="400" height="200">
+     <img src="https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/images/Screen%20Shot%202018-03-18%20at%202.27.49%20AM.png" width="800" height="300">
      
 3. [Autoencoders](https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/models/autoencoders.py): 
