@@ -7,7 +7,7 @@ from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-from utils import unison_shuffled_copies
+from CreditCardFraudDetection.utils import unison_shuffled_copies
 
 # records_per_label_per_batch =
 # batch_size_per_class = 512

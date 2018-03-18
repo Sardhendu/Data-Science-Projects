@@ -1,50 +1,22 @@
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
-from sklearn import metrics# import recall_score
-import data_prep
+
 import numpy  as np
 import pandas as pd
 import time
 
-from plots import Plot
+from CreditCardFraudDetection.plots import Plot
 import xgboost as xgb
-from xgboost.sklearn import XGBClassifier
-import matplotlib
-import matplotlib.pyplot as plt
 
-class Score():
-    '''
-    Only provide binary input
-    Scores are calculated based on 1
-    '''
-    @staticmethod
-    def recall(y_true, y_pred, reverse=False):
-        ''' tp / (tp+fn) --> Accuracy(y_true = 1 | y_pred = 1) '''
-        if reverse:
-            y_true = 1 - y_true
-            y_pred = 1 - y_pred
-        return metrics.recall_score(y_true, y_pred)
-    
-    @staticmethod
-    def precision(y_true, y_pred, reverse=False):
-        ''' tp / (tp+fp) '''
-        if reverse:
-            y_true = 1 - y_true
-            y_pred = 1 - y_pred
-        return metrics.precision_score(y_true, y_pred)
-    
-    @staticmethod
-    def accuracy(y_true, y_pred):
-        return metrics.accuracy_score(y_true, y_pred)
-    
-    @staticmethod
-    def auc(y_true, y_pred):
-        return metrics.roc_auc_score(y_true, y_pred)
-    
-    
+
+from CreditCardFraudDetection import data_prep
+from xgboost.sklearn import XGBClassifier
+
+
+
 
 
 class RandomForest():
-    def __init__(self, model_obj):
+    def __init__(self, model_obj=None):
         if model_obj:
             self.clf_rf = model_obj
         else:
@@ -58,7 +30,7 @@ class RandomForest():
 
 
 class GradientBoosting():
-    def __init__(self, model_obj):
+    def __init__(self, model_obj=None):
         '''
         Tree Based.
             1. max_feature: Number of feature to be consider while deciding each split
@@ -99,7 +71,7 @@ class GradientBoosting():
         
  
 class XGBoost():
-    def __init__(self, model_obj):
+    def __init__(self, model_obj=None):
         
         '''
         Credits:
