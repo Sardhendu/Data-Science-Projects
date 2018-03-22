@@ -10,8 +10,7 @@ from CreditCardFraudDetection.utils import to_one_hot, Score
 
 
 
-logging.basicConfig(level=logging.DEBUG, filename="logfile.log", filemode="w",
-                    format="%(asctime)-15s %(levelname)-8s %(message)s")
+logging.basicConfig(level=logging.DEBUG, filename="logfile.log", filemode="w", format="%(asctime)-15s %(levelname)-8s %(message)s")
 
 
 epsilon = 1e-3
@@ -123,7 +122,7 @@ class DeepNet():
     
             if self.REGULARIZE:
                 logging.info('Adding Regularization with lambda (%s) to the Loss Function', str(self.lamda))
-                regularizers = tf.nn.l2_loss(w1) + tf.nn.l2_loss(w2) + tf.nn.l2_loss(w3) + tf.nn.l2_loss(w3)
+                regularizers = tf.nn.l2_loss(w1) + tf.nn.l2_loss(w2) + tf.nn.l2_loss(w3) + tf.nn.l2_loss(w4)
                 lossCE = tf.reduce_mean(lossCE + self.lamda * regularizers)
             
         with tf.variable_scope("optimizer"):

@@ -1,20 +1,35 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+from sklearn import metrics
 sns.set_style("whitegrid")
 
 
-class Plot():
-    def __init__(self, rows=1, columns=1, fig_size=[8, 8]):
+class GlobalPlot(object):
+    def __init__(self, rows, columns, fig_size):
         fig_size = tuple(fig_size)
         f, axs = plt.subplots(rows, columns, figsize=fig_size)
         self.axs_ind = 0
-        
+    
         if rows == 1 and columns == 1:
             self.axs = [axs]
         else:
             self.axs = axs.ravel()
+            
+    def help(self):
+        help_string = ''
+        help_string = help_string + 'ROC_CURVE: Plot().vizualize(data=pd.DataFrame({"fpr":fpr,"tpr":tpr}), ' \
+                                    'colX="fpr", colY="tpr", label_col=None, viz_type="roc", params={})   '
+        help_string = help_string + 'LINE_PLOT: Plot().vizualize(data=pd.DataFrame(your_array, ' \
+                                  'columns=["your_column_name"]), ' \
+                      'colX=None, colY=None, label_col=None, viz_type="line",  params={"title":"your_column_name"})   '
+        
+        return help_string
+            
+            
+class Plot(GlobalPlot):
+    def __init__(self, rows=1, columns=1, fig_size=[8, 8]):
+        GlobalPlot.__init__(self, rows, columns, fig_size)
     
     def vizualize(self, data, colX, colY=None, label_col=None, viz_type='bar', params={}):
         '''
@@ -47,7 +62,6 @@ class Plot():
                 ax.set_title(params['title'])
             
             for e, p in enumerate(ax.patches):
-                # print ('dsadasdasdasdasdadasdadas')
                 height = p.get_height()
                 ax.text(p.get_x() + p.get_width() / 2.,
                         height + 3,
@@ -77,7 +91,23 @@ class Plot():
             
             if 'title' in params:
                 ax.set_title(params['title'])
-        
+                
+                
+        if viz_type == 'roc':
+            '''
+            Send a data frame with two columns
+                1) array of false positive values and
+                2) array of true positive values
+            '''
+            ax = self.axs[self.axs_ind]
+            ax.plot(np.array(data[colX]), np.array(data[colY]), 'b',
+                     label='AUC = %0.2f' % metrics.auc(np.array(data[colX]),np.array(data[colY])))
+
+            ax.legend(loc='lower right')
+            ax.plot([0, 1], [0, 1], 'r--')
+            ax.set(xlabel='False Positive Rate', ylabel='True Positive Rate')
+            ax.set_title('ROC CURVE')
+            
         self.axs_ind += 1
     
     def show(self):

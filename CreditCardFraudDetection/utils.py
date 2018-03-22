@@ -33,6 +33,11 @@ class Score():
     @staticmethod
     def auc(y_true, y_pred):
         return metrics.roc_auc_score(y_true, y_pred)
+    
+    @staticmethod
+    def roc_curve(y_true, y_pred):
+        fpr, tpr, threshold = metrics.roc_curve(y_true, y_pred)
+        return fpr, tpr, threshold
 
 
 def to_one_hot(y):

@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f44b8bae-4a94-4ba7-a4dc-46e7a722ad98" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/ROUGH.ipynb" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/ROUGH.ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/logfile.log" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/logfile.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/autoencoders.py" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/models/autoencoders.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/logfile.log" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/models/logfile.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/nnet.py" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/models/nnet.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/plots.py" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/plots.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/utils.py" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/utils.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,63 +30,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="249">
-                <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="470">
-                <caret line="24" column="225" lean-forward="true" selection-start-line="24" selection-start-column="225" selection-end-line="24" selection-end-column="225" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="data_prep.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#64#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="autoencoders.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models/autoencoders.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#1#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="nnet.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models/nnet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="-4845">
+              <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="554">
+              <caret line="31" column="4" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -87,20 +57,8 @@
       <file leaf-file-name="logfile.log" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/logfile.log">
           <provider selected="true" editor-type-id="LogFileEditorProvider">
-            <state relative-caret-position="836">
-              <caret line="1245" column="59" lean-forward="false" selection-start-line="1245" selection-start-column="59" selection-end-line="1245" selection-end-column="59" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="14" column="60" lean-forward="false" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="60" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
             </state>
           </provider>
         </entry>
@@ -108,10 +66,44 @@
       <file leaf-file-name="boosting.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models/boosting.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-996">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <element signature="e#0#79#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="data_prep.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="65" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="autoencoders.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models/autoencoders.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="249">
+              <caret line="138" column="24" lean-forward="false" selection-start-line="138" selection-start-column="16" selection-end-line="138" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#64#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plots.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/plots.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="196">
+              <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -129,26 +121,14 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>spatialData</find>
-      <find>densityClusterPlot</find>
-      <find>getCluster_Info</find>
-      <find>meanVSactual_dist</find>
-      <find>getCluster_Area</find>
-      <find>meanVSactual_dist_plot</find>
-      <find>metrics</find>
-      <find>print</find>
-      <find>smote_batch_size</find>
       <find>learnin</find>
       <find>layer_shape</find>
       <find>batch_size_per_class</find>
-      <find>get_batches</find>
       <find>testY</find>
       <find>probs</find>
       <find>batch_size</find>
-      <find>fc_layers</find>
       <find>cv_loss_arr</find>
       <find>ts_precsion_score</find>
-      <find>layers</find>
       <find>batch_norm</find>
       <find>X</find>
       <find>computation_graph</find>
@@ -159,6 +139,18 @@
       <find>batch</find>
       <find>model</find>
       <find>lr_decay</find>
+      <find>layer_dims</find>
+      <find>autoencoder</find>
+      <find>fc_layers</find>
+      <find>get_batches</find>
+      <find>layers</find>
+      <find>standarize</find>
+      <find>uni</find>
+      <find>trainX</find>
+      <find>data_prep</find>
+      <find>unison_shuffled_copies</find>
+      <find>tr_ls_arr</find>
+      <find>lege</find>
     </findStrings>
     <replaceStrings>
       <replace>minNumClusters</replace>
@@ -191,7 +183,6 @@
         <option value="$PROJECT_DIR$/GeoSpatial-Analysis/___run___.py" />
         <option value="$PROJECT_DIR$/GeoSpatial-Analysis/mainPlots.py" />
         <option value="$PROJECT_DIR$/CreditCardFraudDetection/model_evaluate.ipynb" />
-        <option value="$PROJECT_DIR$/CreditCardFraudDetection/plots.py" />
         <option value="$PROJECT_DIR$/CreditCardFraudDetection/TODOS.md" />
         <option value="$PROJECT_DIR$/CreditCardFraudDetection/nnet.py" />
         <option value="$PROJECT_DIR$/CreditCardFraudDetection/run_net.py" />
@@ -199,22 +190,23 @@
         <option value="$PROJECT_DIR$/CreditCardFraudDetection/autoencoder2.py" />
         <option value="$PROJECT_DIR$/CreditCardFraudDetection/autoencoders.py" />
         <option value="$PROJECT_DIR$/CreditCardFraudDetection/Models/net_boost.py" />
-        <option value="$PROJECT_DIR$/CreditCardFraudDetection/models/autoencoders.py" />
-        <option value="$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py" />
         <option value="$PROJECT_DIR$/CreditCardFraudDetection/models/logfile.log" />
-        <option value="$PROJECT_DIR$/CreditCardFraudDetection/utils.py" />
         <option value="$PROJECT_DIR$/CreditCardFraudDetection/models/boosting.py" />
         <option value="$PROJECT_DIR$/CreditCardFraudDetection/models/net_boost.py" />
-        <option value="$PROJECT_DIR$/CreditCardFraudDetection/models/nnet.py" />
-        <option value="$PROJECT_DIR$/CreditCardFraudDetection/logfile.log" />
         <option value="$PROJECT_DIR$/CreditCardFraudDetection/README.md" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py" />
+        <option value="$PROJECT_DIR$/CreditCardFraudDetection/models/nnet.py" />
+        <option value="$PROJECT_DIR$/CreditCardFraudDetection/logfile.log" />
+        <option value="$PROJECT_DIR$/CreditCardFraudDetection/models/autoencoders.py" />
+        <option value="$PROJECT_DIR$/CreditCardFraudDetection/utils.py" />
+        <option value="$PROJECT_DIR$/CreditCardFraudDetection/plots.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="2560" />
-    <option name="height" value="1080" />
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -254,6 +246,7 @@
     </navigator>
     <panes>
       <pane id="ProjectPane" />
+      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <expand>
@@ -266,31 +259,24 @@
               <item name="DataScienceProjects" type="cbb8eebc:String" user="DataScienceProjects" />
               <item name="CreditCardFraudDetection" type="cbb8eebc:String" user="CreditCardFraudDetection" />
             </path>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="DataScienceProjects" type="cbb8eebc:String" user="DataScienceProjects" />
-              <item name="CreditCardFraudDetection" type="cbb8eebc:String" user="CreditCardFraudDetection" />
-              <item name="models" type="cbb8eebc:String" user="models" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="PyConsoleConfigurable.Python Console" />
     <property name="ToolWindowTerminal.ShowToolbar" value="false" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/sam/All-Program/App/Data-Science-Projects/GeoSpatial-Analysis/___run___.py" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
-      <console-settings module-name="Data-Science-Projects" is-module-sdk="true" working-directory="$PROJECT_DIR$/GeoSpatial-Analysis">
+      <console-settings module-name="Data-Science-Projects" is-module-sdk="true" working-directory="$PROJECT_DIR$">
         <option name="myUseModuleSdk" value="true" />
         <option name="myModuleName" value="Data-Science-Projects" />
-        <option name="myWorkingDirectory" value="$PROJECT_DIR$/GeoSpatial-Analysis" />
+        <option name="myWorkingDirectory" value="$PROJECT_DIR$" />
       </console-settings>
     </option>
   </component>
@@ -311,7 +297,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.net_boost">
+  <component name="RunManager" selected="Python.autoencoders (1)">
     <configuration name="___run___" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -410,6 +396,23 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+    <configuration name="autoencoders (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CreditCardFraudDetection/models" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Data-Science-Projects" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CreditCardFraudDetection/models/autoencoders.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <configuration name="autoencoders" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -461,38 +464,21 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="nnet" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CreditCardFraudDetection" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Data-Science-Projects" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CreditCardFraudDetection/Models/nnet.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python.___run___" />
-      <item index="1" class="java.lang.String" itemvalue="Python.nnet" />
-      <item index="2" class="java.lang.String" itemvalue="Python.autoencoders" />
-      <item index="3" class="java.lang.String" itemvalue="Python.autoencoder2" />
-      <item index="4" class="java.lang.String" itemvalue="Python.nnet (1)" />
-      <item index="5" class="java.lang.String" itemvalue="Python.net_boost" />
+      <item index="1" class="java.lang.String" itemvalue="Python.autoencoders" />
+      <item index="2" class="java.lang.String" itemvalue="Python.autoencoder2" />
+      <item index="3" class="java.lang.String" itemvalue="Python.nnet (1)" />
+      <item index="4" class="java.lang.String" itemvalue="Python.net_boost" />
+      <item index="5" class="java.lang.String" itemvalue="Python.autoencoders (1)" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.net_boost" />
-        <item index="1" class="java.lang.String" itemvalue="Python.nnet (1)" />
-        <item index="2" class="java.lang.String" itemvalue="Python.autoencoder2" />
-        <item index="3" class="java.lang.String" itemvalue="Python.autoencoders" />
-        <item index="4" class="java.lang.String" itemvalue="Python.nnet" />
+        <item index="0" class="java.lang.String" itemvalue="Python.autoencoders (1)" />
+        <item index="1" class="java.lang.String" itemvalue="Python.net_boost" />
+        <item index="2" class="java.lang.String" itemvalue="Python.nnet (1)" />
+        <item index="3" class="java.lang.String" itemvalue="Python.autoencoder2" />
+        <item index="4" class="java.lang.String" itemvalue="Python.autoencoders" />
       </list>
     </recent_temporary>
   </component>
@@ -523,15 +509,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16380544" sideWeight="0.842711" order="2" side_tool="false" content_ui="combo" x="332" y="23" width="291" height="877" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18168813" sideWeight="0.842711" order="2" side_tool="false" content_ui="combo" x="332" y="23" width="291" height="877" />
       <window_info id="TODO" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904148" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32943925" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3040057" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2167382" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="511" y="19" width="449" height="900" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15607625" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1564734" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="511" y="19" width="449" height="900" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3018598" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.4960182" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3590844" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2079646" sideWeight="0.157289" order="1" side_tool="true" content_ui="tabs" />
@@ -560,7 +546,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/GeoSpatial-Analysis/DataGenerator.py" />
     <entry file="file://$PROJECT_DIR$/GeoSpatial-Analysis/ValidateLocation.py" />
     <entry file="file://$PROJECT_DIR$/GeoSpatial-Analysis/Clusters.py" />
     <entry file="file://$PROJECT_DIR$/GeoSpatial-Analysis/___plots___.py" />
@@ -614,16 +599,6 @@
     <entry file="file://$PROJECT_DIR$/GeoSpatial-Analysis/Estimated_VS_actualPoint_UTM-Plot.html" />
     <entry file="file://$PROJECT_DIR$/GeoSpatial-Analysis/Clusters.py" />
     <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/model_evaluate.ipynb" />
-    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/plots.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/run_net.py" />
     <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/TODOS.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
@@ -643,50 +618,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="14" column="60" lean-forward="false" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/logfile.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="836">
-          <caret line="1245" column="59" lean-forward="false" selection-start-line="1245" selection-start-column="59" selection-end-line="1245" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models/net_boost.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models/boosting.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-996">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#79#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models/nnet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#64#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -694,37 +629,6 @@
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
           <selected id="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models/autoencoders.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#1#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="470">
-            <caret line="24" column="225" lean-forward="true" selection-start-line="24" selection-start-column="225" selection-end-line="24" selection-end-column="225" />
-            <folding />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -736,11 +640,92 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="249">
-            <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
-            <folding />
+          <first_editor relative-caret-position="290">
+            <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="510">
+            <caret line="24" column="225" lean-forward="false" selection-start-line="24" selection-start-column="225" selection-end-line="24" selection-end-column="225" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/App-Setup/anaconda/envs/anaconda35/lib/python3.5/site-packages/tensorflow/python/framework/ops.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="925" column="0" lean-forward="false" selection-start-line="925" selection-start-column="0" selection-end-line="925" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models/boosting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#79#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/data_prep.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/logfile.log">
+      <provider selected="true" editor-type-id="LogFileEditorProvider">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models/nnet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4845">
+          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="31" column="4" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/plots.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models/autoencoders.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="138" column="24" lean-forward="false" selection-start-line="138" selection-start-column="16" selection-end-line="138" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#64#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -152,13 +152,17 @@ def data_prep(dataX, dataY):
     return trainX, trainY, testX, testY, cvalidX, cvalidY
 
 
+def standarize(x):
+    return (x-np.mean(x, axis=0))/np.std(x, axis=0)
+
 def feature_transform():
     data_dir = '/Users/sam/All-Program/App-DataSet/z-others/creditcard.csv'
     data = pd.read_csv(data_dir)
     data = data.drop(['Time'], axis=1)
-    data['Amount'] = StandardScaler().fit_transform(data['Amount'].values.reshape(-1, 1))
+    # data['Amount'] = StandardScaler().fit_transform(data['Amount'].values.reshape(-1, 1))
     dataX = data.drop(['Class'], axis=1)
     dataY = data[['Class']]
+    dataX = standarize(dataX)
     
     xFeatures = dataX.columns
     yLabel = dataY.columns
