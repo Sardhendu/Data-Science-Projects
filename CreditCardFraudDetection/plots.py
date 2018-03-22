@@ -19,10 +19,10 @@ class GlobalPlot(object):
     def help(self):
         help_string = ''
         help_string = help_string + 'ROC_CURVE: Plot().vizualize(data=pd.DataFrame({"fpr":fpr,"tpr":tpr}), ' \
-                                    'colX="fpr", colY="tpr", label_col=None, viz_type="roc", params={})   '
+                                    'colX="fpr", colY="tpr", label_col=None, viz_type="roc", params={"title":"your_title"})   '
         help_string = help_string + 'LINE_PLOT: Plot().vizualize(data=pd.DataFrame(your_array, ' \
                                   'columns=["your_column_name"]), ' \
-                      'colX=None, colY=None, label_col=None, viz_type="line",  params={"title":"your_column_name"})   '
+                      'colX=None, colY=None, label_col=None, viz_type="line",  params={"title":"your_title"})   '
         
         return help_string
             
@@ -36,11 +36,29 @@ class Plot(GlobalPlot):
             params : title,
             data should be a data frame
         '''
-        if viz_type == 'hist':
+        params_keys = list(params.keys())
+        if viz_type == 'dist':
             data = data.reset_index().drop('index', 1)
             sns.distplot(data, ax=self.axs[self.axs_ind])
-            if 'title' in params:
+            if 'title' in params_keys:
                 self.axs[self.axs_ind].set_title(params['title'])
+                
+        if viz_type == 'hist':
+            ax = self.axs[self.axs_ind]
+            if 'bins' in params_keys:
+                ax.hist(data[colX], bins=params['bins'])
+            else:
+                ax.hist(data[colX])
+            
+            if 'xlabel' in params_keys and 'ylabel' in params_keys:
+                ax.set(xlabel=params['xlabel'], ylabel=params['ylabel'])
+                
+            if 'title' in params_keys:
+                ax.set_title(params['title'])
+                
+            for item in ([ax.title, ax.xaxis.label, ax.yaxis.label] +
+                             ax.get_xticklabels() + ax.get_yticklabels()):
+                item.set_fontsize(20)
         
         if viz_type == 'scatter':
             data.plot.scatter(x=colX, y=colY, c=label_col, colormap='Dark2', ax=self.axs[self.axs_ind])
@@ -58,7 +76,7 @@ class Plot(GlobalPlot):
                 percentage = np.array(data[colY], dtype=float) / sum(np.array(data[colY], dtype=float))
                 sns.barplot(x=colX, y=colY, data=data, ax=ax)
             
-            if 'title' in params:
+            if 'title' in params_keys:
                 ax.set_title(params['title'])
             
             for e, p in enumerate(ax.patches):
@@ -69,7 +87,7 @@ class Plot(GlobalPlot):
                         ha="center")
         
         if viz_type == 'countplot':
-            ''' Prefer when labels are not highly imbalance, The plot would render nicely'''
+            ''' Prefer when labels are not highly imbalance, The plot would render nicely '''
             ax = self.axs[self.axs_ind]
             tot_cnt = float(len(data))
             sns.countplot(x=colX, hue=label_col, data=data, ax=ax)
@@ -89,7 +107,7 @@ class Plot(GlobalPlot):
             
             ax.legend(list(data.columns), loc=4)
             
-            if 'title' in params:
+            if 'title' in params_keys:
                 ax.set_title(params['title'])
                 
                 
@@ -106,7 +124,9 @@ class Plot(GlobalPlot):
             ax.legend(loc='lower right')
             ax.plot([0, 1], [0, 1], 'r--')
             ax.set(xlabel='False Positive Rate', ylabel='True Positive Rate')
-            ax.set_title('ROC CURVE')
+            
+            if 'title' in params_keys:
+                ax.set_title(params['title'])
             
         self.axs_ind += 1
     

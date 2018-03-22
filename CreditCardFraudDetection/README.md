@@ -28,4 +28,12 @@ The data set contains 284807 records where 284315 are non-fraud transaction and 
     
      <img src="https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/images/Screen%20Shot%202018-03-18%20at%202.27.49%20AM.png" width="1000" height="300">
      
-3. [Autoencoders](https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/models/autoencoders.py): 
+3. [Autoencoders](https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/models/autoencoders.py):
+
+
+
+REFERENCES:
+
+1. https://uu.diva-portal.org/smash/get/diva2:1150344/FULLTEXT01.pdf
+2. https://medium.com/@curiousily/credit-card-fraud-detection-using-autoencoders-in-keras-tensorflow-for-hackers-part-vii-20e0c85301bd 
+3. https://github.com/aaxwaz/Fraud-detection-using-deep-learning

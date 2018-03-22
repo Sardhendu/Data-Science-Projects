@@ -101,12 +101,14 @@ def autoencoder(layer_dims, learning_rate, lamda, REGULARIZE):
     return dict(inpX=inpX, loss=lossMSE, batch_mse=batchMSE, optimizer=opt)
 
 
-def nnet(trainX, trainY, cvalidX, cvalidY, layers, batch_size, display_step, num_epochs, learning_rate, lamda,
+def train(trainX, trainY, cvalidX, cvalidY, layers, batch_size, display_step, num_epochs, learning_rate, lamda,
          REGULARIZE, MODEL_PATH, MODEL_NAME):
     tr_ls_arr = []
     cv_ls_arr = []
     tr_auc_arr = []
     cv_auc_arr = []
+    tr_batch_mse = []
+    cv_batch_mse = []
     
     tf.reset_default_graph()
     computation_graph = autoencoder(layers, learning_rate, lamda, REGULARIZE=REGULARIZE)
@@ -134,15 +136,15 @@ def nnet(trainX, trainY, cvalidX, cvalidY, layers, batch_size, display_step, num
             if ((epoch + 1) % display_step) == 0:
                 # Get the Training Accuracy for all the Training Data Points
                 # Note here we don't evaluate the up-sampled Training set, but the original set
-                tr_b_mse, tr_ls = sess.run([computation_graph['batch_mse'], computation_graph['loss']],
+                tr_batch_mse, tr_ls = sess.run([computation_graph['batch_mse'], computation_graph['loss']],
                                            feed_dict={computation_graph['inpX']: trainX})
-                cv_b_mse, cv_ls = sess.run([computation_graph['batch_mse'], computation_graph['loss']],
+                cv_batch_mse, cv_ls = sess.run([computation_graph['batch_mse'], computation_graph['loss']],
                                            feed_dict={computation_graph['inpX']: cvalidX})
                 tr_ls_arr.append(tr_ls)
                 cv_ls_arr.append(cv_ls)
                 
-                tr_auc_score = Score.auc(trainY, tr_b_mse)
-                cv_auc_score = Score.auc(cvalidY, cv_b_mse)
+                tr_auc_score = Score.auc(trainY, tr_batch_mse)
+                cv_auc_score = Score.auc(cvalidY, cv_batch_mse)
                 logging.info('Epoch = %s, Train Loss = %s, CV Loss = %s, Train AUC = %s, CV AUC = %s',
                              str(epoch+1), str(round(tr_ls, 4)), str(round(cv_ls, 4)),
                              str(round(tr_auc_score, 4)), str(round(cv_auc_score, 4)))
@@ -153,12 +155,24 @@ def nnet(trainX, trainY, cvalidX, cvalidY, layers, batch_size, display_step, num
         if MODEL_PATH:
              saver.save(sess, save_model)
 
-    return tr_ls_arr, cv_ls_arr, tr_auc_arr, cv_auc_arr
+    return tr_ls_arr, cv_ls_arr, tr_auc_arr, cv_auc_arr, tr_batch_mse, cv_batch_mse
     
     
+def test(testX, testY, layers, MODEL_PATH, MODEL_NAME):
+    tf.reset_default_graph()
+    save_model = os.path.join(MODEL_PATH, MODEL_NAME)
+    # Initializing the variables
+    computation_graph = autoencoder(layer_dims=layers, learning_rate=0, lamda=0, REGULARIZE=False)
     
+    saver = tf.train.Saver()
+    with tf.Session() as sess:
+        sess.run(tf.global_variables_initializer())
+        saver.restore(sess, save_model)
+        test_batch_mse, tst_loss = sess.run([computation_graph['batch_mse'], computation_graph['loss']],
+                                            feed_dict={computation_graph['inpX']: testX})
+        print("Test auc score: {:.6f}".format(Score.auc(testY, test_batch_mse)))
 
-    
+    return tst_loss, test_batch_mse
 
     
     

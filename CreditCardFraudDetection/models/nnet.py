@@ -15,14 +15,6 @@ logging.basicConfig(level=logging.DEBUG, filename="logfile.log", filemode="w", f
 
 epsilon = 1e-3
 
-
-
-
-
-# seed = [284, 873, 199, 982]
-
-
-
 def fc_layers(X, inp, out, seed, name):
     with tf.variable_scope(name):
         w = tf.get_variable(dtype=tf.float32,
