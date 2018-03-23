@@ -46,17 +46,12 @@ The data set contains 284807 records where 284315 are non-fraud transaction and 
             * Average CrossValidation: Accuracy : 0.999, Recall (Identifying Fraud): 0.8909
             * Average Test: Accuracy : 0.998, Recall (Identifying Fraud): 0.915
             
-        <img src="https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/images
-        /dl_training.png" width="800" height="300"><img src="https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/images/dl_cross_valid.png" width="800" height="300">
+        <img src="https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/images/dl_training.png" width="800" height="300"><img src="https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/images/dl_cross_valid.png" width="800" height="300">
      
 3. [Autoencoders](https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/models/autoencoders.py): Autoencoders can be thought as an unsupervised learning problem, where the input X is fed to the network. X is transformed through one or many hidden layers and final layer computes the mean squared error (MSE) between the input X and the transformedX. The idea here is the make the **MSE** smaller, by doing so the network would try to learn latent features that would hopefully distinguish **Fraud and Non-Frauds**.
 
     * [Model Evaluation](https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/model_eval_autoEncoders.ipynb): 
-     <img src="https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/images/AEnc_reconstruction_err_test.png" width="500" height="300"><img src="https://github
-     .com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/images/AEnc_test_roc.png" width="250" 
-     height="300"><img src="https://github
-     .com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/images/AEnc_reconstruction_err_test.png" width="250" 
-     height="300">
+        <img src="https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/images/AEnc_reconstruction_err_test.png" width="500" height="300"><img src="https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/images/AEnc_test_roc.png" width="250" height="300"><img src="https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/images/AEnc_reconstruction_err_test.png" width="250" height="300">
 
 4. Parallelized Bayesian Networks: (TODO)
 
