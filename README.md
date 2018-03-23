@@ -20,7 +20,8 @@
     2. Gradient Boosting
     3. XGBoost
     4. Deep Neural Nets
-    5. Autoencoders  
+    5. Autoencoders
+    6. Parallelized Bayesian Network (TODO List)  
 
 2. [Diabetic-Readmission Analysis](https://github.com/Sardhendu/Data-Science-Projects/blob/master/Diabetic-Readmission/DiabeticReadmission-Spark.ipynb): {PySpark, R}
 
