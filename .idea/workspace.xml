@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f44b8bae-4a94-4ba7-a4dc-46e7a722ad98" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/images/Screen Shot 2018-03-18 at 2.27.49 AM.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/README.md" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -123,8 +120,8 @@
         <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="1260">
-                <caret line="55" column="14" lean-forward="false" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="14" />
+              <first_editor relative-caret-position="465">
+                <caret line="49" column="186" lean-forward="false" selection-start-line="49" selection-start-column="186" selection-end-line="49" selection-end-column="186" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -765,8 +762,8 @@
     <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="1260">
-            <caret line="55" column="14" lean-forward="false" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="14" />
+          <first_editor relative-caret-position="465">
+            <caret line="49" column="186" lean-forward="false" selection-start-line="49" selection-start-column="186" selection-end-line="49" selection-end-column="186" />
             <folding />
           </first_editor>
           <second_editor />
