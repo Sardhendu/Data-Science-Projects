@@ -45,13 +45,13 @@ def get_loss(which_loss, y, y_pred, lamda = 0, weights_arr=[]):
         if which_loss == 'kl_div':
             loss_ = (rho * tf.log(rho / rho_hat)) + (rho_hat * tf.log((1 - rho) / (1 - rho_hat)))
         elif which_loss == 'mse':
-            batch_mse = tf.reduce_mean(tf.pow(y - y_pred, 2), 1) # since axis is 1 the mean is computed per row i.e
+            reconstruction_mse = tf.reduce_mean(tf.pow(y - y_pred, 2), 1) # since axis is 1 the mean is computed per row i.e
             # for each data point in the batch what is the reduced_mean or SSE calculated for all feature
             loss_ = tf.reduce_mean(tf.pow(y - y_pred, 2) + lamda*loss)  # Note no axis is given so this outputs only 1 values
         else:
             raise ValueError('Provide a valid loss function')
         
-    return loss_, batch_mse
+    return loss_, reconstruction_mse
 
 def autoencoder(layer_dims, learning_rate, lamda, REGULARIZE):
     '''
@@ -60,7 +60,7 @@ def autoencoder(layer_dims, learning_rate, lamda, REGULARIZE):
     :param lamda:
     :param REGULARIZE:
     :return:
-    The idea of using autoencoder is that we try to learn a representation of the data such that that representation  marks some distinction between the fraud case and the non-fraud case. In-order to learn this representation we calculate the mean squared error between the inp data and the output data (same shape as input).
+    The idea of using autoencoder is that we try to learn a representation of the data such that that the representation  marks some distinction between the fraud case and the non-fraud case. In-order to learn this representation we calculate the mean squared error between the inp data and the output data (same shape as input).
     
     The output highly depends on the activations selected (tanh and sigmoid). if the output and input are from different distribution ex (input = 200, 300 and output =0.2,0.4) then the weight will be learned such that the linear activation outputs high values. Now when we squash the high linear activation through a tanh unit then the values would be at far end and while backpropagation the gradient wold have a high chance os becoming 0. Here comes vanishing gradients.
     
@@ -98,7 +98,7 @@ def autoencoder(layer_dims, learning_rate, lamda, REGULARIZE):
     with tf.variable_scope("optimizer"):
         opt = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(lossMSE)
     
-    return dict(inpX=inpX, loss=lossMSE, batch_mse=batchMSE, optimizer=opt)
+    return dict(inpX=inpX, loss=lossMSE, reconstruction_mse=batchMSE, optimizer=opt)
 
 
 def train(trainX, trainY, cvalidX, cvalidY, layers, batch_size, display_step, num_epochs, learning_rate, lamda,
@@ -107,8 +107,8 @@ def train(trainX, trainY, cvalidX, cvalidY, layers, batch_size, display_step, nu
     cv_ls_arr = []
     tr_auc_arr = []
     cv_auc_arr = []
-    tr_batch_mse = []
-    cv_batch_mse = []
+    tr_reconstruction_mse = []
+    cv_reconstruction_mse = []
     
     tf.reset_default_graph()
     computation_graph = autoencoder(layers, learning_rate, lamda, REGULARIZE=REGULARIZE)
@@ -121,30 +121,28 @@ def train(trainX, trainY, cvalidX, cvalidY, layers, batch_size, display_step, nu
         sess.run(tf.global_variables_initializer())
 
         for epoch in range(0, num_epochs):
-            for batch_num, (batchX, batchY) in enumerate(
+            for batch_num, (batchX, _) in enumerate(
                     data_prep.get_batches(X=trainX,Y=trainY,batch_size=batch_size)):
-                
-                
-                # print (np.where(batchY==1)[0], batchY)
+                    
                 feed_dict = {computation_graph['inpX']: batchX}
 
                 ls, bmse, _ = sess.run([computation_graph['loss'],
-                                        computation_graph['batch_mse'],
+                                        computation_graph['reconstruction_mse'],
                                         computation_graph['optimizer']],
                                        feed_dict=feed_dict)
                 
             if ((epoch + 1) % display_step) == 0:
                 # Get the Training Accuracy for all the Training Data Points
                 # Note here we don't evaluate the up-sampled Training set, but the original set
-                tr_batch_mse, tr_ls = sess.run([computation_graph['batch_mse'], computation_graph['loss']],
+                tr_reconstruction_mse, tr_ls = sess.run([computation_graph['reconstruction_mse'], computation_graph['loss']],
                                            feed_dict={computation_graph['inpX']: trainX})
-                cv_batch_mse, cv_ls = sess.run([computation_graph['batch_mse'], computation_graph['loss']],
+                cv_reconstruction_mse, cv_ls = sess.run([computation_graph['reconstruction_mse'], computation_graph['loss']],
                                            feed_dict={computation_graph['inpX']: cvalidX})
                 tr_ls_arr.append(tr_ls)
                 cv_ls_arr.append(cv_ls)
                 
-                tr_auc_score = Score.auc(trainY, tr_batch_mse)
-                cv_auc_score = Score.auc(cvalidY, cv_batch_mse)
+                tr_auc_score = Score.auc(trainY, tr_reconstruction_mse)
+                cv_auc_score = Score.auc(cvalidY, cv_reconstruction_mse)
                 logging.info('Epoch = %s, Train Loss = %s, CV Loss = %s, Train AUC = %s, CV AUC = %s',
                              str(epoch+1), str(round(tr_ls, 4)), str(round(cv_ls, 4)),
                              str(round(tr_auc_score, 4)), str(round(cv_auc_score, 4)))
@@ -155,7 +153,7 @@ def train(trainX, trainY, cvalidX, cvalidY, layers, batch_size, display_step, nu
         if MODEL_PATH:
              saver.save(sess, save_model)
 
-    return tr_ls_arr, cv_ls_arr, tr_auc_arr, cv_auc_arr, tr_batch_mse, cv_batch_mse
+    return tr_ls_arr, cv_ls_arr, tr_auc_arr, cv_auc_arr, tr_reconstruction_mse, cv_reconstruction_mse
     
     
 def test(testX, testY, layers, MODEL_PATH, MODEL_NAME):
@@ -168,11 +166,11 @@ def test(testX, testY, layers, MODEL_PATH, MODEL_NAME):
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
         saver.restore(sess, save_model)
-        test_batch_mse, tst_loss = sess.run([computation_graph['batch_mse'], computation_graph['loss']],
+        test_reconstruction_mse, tst_loss = sess.run([computation_graph['reconstruction_mse'], computation_graph['loss']],
                                             feed_dict={computation_graph['inpX']: testX})
-        print("Test auc score: {:.6f}".format(Score.auc(testY, test_batch_mse)))
+        print("Test auc score: {:.6f}".format(Score.auc(testY, test_reconstruction_mse)))
 
-    return tst_loss, test_batch_mse
+    return tst_loss, test_reconstruction_mse
 
     
     

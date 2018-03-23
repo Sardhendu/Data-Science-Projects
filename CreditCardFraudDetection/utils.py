@@ -38,6 +38,11 @@ class Score():
     def roc_curve(y_true, y_pred):
         fpr, tpr, threshold = metrics.roc_curve(y_true, y_pred)
         return fpr, tpr, threshold
+    
+    @staticmethod
+    def precision_recall_curve(y_true, y_pred):
+        precision, recall, threshold = metrics.precision_recall_curve(y_true, y_pred)
+        return precision, recall, threshold
 
 
 def to_one_hot(y):
