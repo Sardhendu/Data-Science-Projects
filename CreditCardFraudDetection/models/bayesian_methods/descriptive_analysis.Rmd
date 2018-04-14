@@ -1,0 +1,203 @@
+---
+title: "ProjectBayesian"
+author: "Sardhendu Mishra"
+date: "4/12/2018"
+output: pdf_document
+---
+
+
+```{r}
+data_dir = '/Users/sam/All-Program/App-DataSet/DataScienceProjects/CreditCardFraud/creditcard.csv'
+dat = read.csv(data_dir)
+head(dat)
+```
+
+```{r}
+# Sample a subset of the data.
+set.seed(619)
+not_fraud = fraud_data[which(dat$Class == 0),]
+dim(fraud)
+dim(not_fraud)
+```
+
+
+### Sample a subset of fraud Transaction
+```{r}
+sample_points = sample(1:28431, 1000, replace=TRUE)
+not_fraud_sample = not_fraud[c(sample_points),]
+dim(not_fraud_sample)
+head(not_fraud_sample)
+```
+```{r}
+set.seed(271)
+dat_set = rbind(not_fraud_sample, fraud)
+dat_set = dat_set[sample(nrow(dat_set)),]
+dim(dat_set)
+head(dat_set, 50)
+```
+
+# Descriptive Analysis:
+* Time seems to have no particular pattern. The data for non-fraud cases seems to be concentrated towards less time, but the data for non-fraud cases are too high, we can't say anything for particular. Also For simplicity we remover the time column
+```{r}
+plot(dat_set$Class ~ dat_set$Time)
+dat_set = dat_set[,2:31]
+dim(dat_set)
+head(dat_set)
+outpath = '/Users/sam/All-Program/App-DataSet/DataScienceProjects/CreditCardFraud/'
+write.csv(dat_set, file = paste(outpath,"sample_credit_fraud.csv"))
+```
+# Pair Plot
+* Judging by the plots there seems to be some relation between explanatory variables. Example, (v1, v3, v5, v7) have increasing trend where as (v1 vs v2) and (v1 vs v8) look quite alike. The data points are howeve clutered aroundin for these variable.
+
+* Therefore, it seems a good idea to do variable selection using Laplace or double exponential dist (Lasso)
+* For some variables there seems to be a curve relationship
+```{r, fig.width=14, fig.height=15}
+pairs(dat_set[,1:10])
+```
+
+* Again here variable v16, v17, v18 are highly coorelated. Variable v11 and v12 are again very highly coorelated. We should again apply feature selection here.
+```{r, fig.width=14, fig.height=15}
+pairs(dat_set[,10:20])
+```
+
+* For Variables from 20 to 28, there seems to be no pattern.
+```{r, fig.width=14, fig.height=15}
+pairs(dat_set[,20:28])
+```
+
+## Coorelation Plot
+* We saw multicolinearity in the data set. Lets look at the correlation plot
+* Like we suspected, there is a strong correlation between first 19 Variables
+```{r, fig.width=10, fig.height=10}
+library(corrplot)
+M = cor(dat_set)
+corrplot(M)
+```
+
+
+## Histogram Distribution:
+* Lets quickly check the histogram of Fraud and non-fraud cases w.r.t few columns:
+* It seems for the sampled data, we have some good distinction between what is fraud and what is not fraud. 
+* It also seems that V10 is a super important variable
+```{r}
+library(reshape2)
+library(ggplot2)
+
+fraud_cases = data.frame(V1=dat_set[which(dat_set$Class == 1),]$V1)
+n_fraud_cases = data.frame(V1=dat_set[which(dat_set$Class == 0),]$V1)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV1 = rbind(fraud_cases, n_fraud_cases)
+
+################
+fraud_cases = data.frame(V2=dat_set[which(dat_set$Class == 1),]$V2)
+n_fraud_cases = data.frame(V2=dat_set[which(dat_set$Class == 0),]$V2)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV2 = rbind(fraud_cases, n_fraud_cases)
+
+###############
+
+fraud_cases = data.frame(V3=dat_set[which(dat_set$Class == 1),]$V3)
+n_fraud_cases = data.frame(V3=dat_set[which(dat_set$Class == 0),]$V3)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV3 = rbind(fraud_cases, n_fraud_cases)
+
+###############
+
+fraud_cases = data.frame(V4=dat_set[which(dat_set$Class == 1),]$V4)
+n_fraud_cases = data.frame(V4=dat_set[which(dat_set$Class == 0),]$V4)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV4 = rbind(fraud_cases, n_fraud_cases)
+
+###############
+
+fraud_cases = data.frame(V5=dat_set[which(dat_set$Class == 1),]$V5)
+n_fraud_cases = data.frame(V5=dat_set[which(dat_set$Class == 0),]$V5)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV5 = rbind(fraud_cases, n_fraud_cases)
+
+###############
+
+fraud_cases = data.frame(V6=dat_set[which(dat_set$Class == 1),]$V6)
+n_fraud_cases = data.frame(V6=dat_set[which(dat_set$Class == 0),]$V6)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV6 = rbind(fraud_cases, n_fraud_cases)
+
+###############
+
+fraud_cases = data.frame(V7=dat_set[which(dat_set$Class == 1),]$V7)
+n_fraud_cases = data.frame(V7=dat_set[which(dat_set$Class == 0),]$V7)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV7 = rbind(fraud_cases, n_fraud_cases)
+
+###############
+
+fraud_cases = data.frame(V8=dat_set[which(dat_set$Class == 1),]$V8)
+n_fraud_cases = data.frame(V8=dat_set[which(dat_set$Class == 0),]$V8)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV8 = rbind(fraud_cases, n_fraud_cases)
+
+###############
+
+fraud_cases = data.frame(V9=dat_set[which(dat_set$Class == 1),]$V9)
+n_fraud_cases = data.frame(V9=dat_set[which(dat_set$Class == 0),]$V9)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV9 = rbind(fraud_cases, n_fraud_cases)
+
+###############
+
+fraud_cases = data.frame(V10=dat_set[which(dat_set$Class == 1),]$V10)
+n_fraud_cases = data.frame(V10=dat_set[which(dat_set$Class == 0),]$V10)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV10 = rbind(fraud_cases, n_fraud_cases)
+
+
+ggplot(dataaV1, aes(V1, fill = cat)) + geom_density(alpha = 0.2)
+ggplot(dataaV2, aes(V2, fill = cat)) + geom_density(alpha = 0.2)
+ggplot(dataaV3, aes(V3, fill = cat)) + geom_density(alpha = 0.2)
+ggplot(dataaV4, aes(V4, fill = cat)) + geom_density(alpha = 0.2)
+ggplot(dataaV5, aes(V5, fill = cat)) + geom_density(alpha = 0.2)
+ggplot(dataaV6, aes(V6, fill = cat)) + geom_density(alpha = 0.2)
+ggplot(dataaV7, aes(V7, fill = cat)) + geom_density(alpha = 0.2)
+ggplot(dataaV8, aes(V8, fill = cat)) + geom_density(alpha = 0.2)
+ggplot(dataaV9, aes(V9, fill = cat)) + geom_density(alpha = 0.2)
+ggplot(dataaV10, aes(V10, fill = cat)) + geom_density(alpha = 0.2)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

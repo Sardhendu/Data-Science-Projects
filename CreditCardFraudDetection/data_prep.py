@@ -156,7 +156,7 @@ def standarize(x):
     return (x-np.mean(x, axis=0))/np.std(x, axis=0)
 
 def feature_transform():
-    data_dir = '/Users/sam/All-Program/App-DataSet/z-others/creditcard.csv'
+    data_dir = '/Users/sam/All-Program/App-DataSet/DataScienceProjects/CreditCardFraud/creditcard.csv'
     data = pd.read_csv(data_dir)
     data = data.drop(['Time'], axis=1)
     # data['Amount'] = StandardScaler().fit_transform(data['Amount'].values.reshape(-1, 1))
