@@ -40,7 +40,7 @@ curve(ddexp(x, mu=0.0, tau=1.0), from=-10.0, to=10.0, ylab="density", main='Doub
 ```{r}
 library('rjags')
 model_string = "model{
-  for (i in 1:length(Class)){
+  for (i in 1:length(y)){
     y[i] ~ dbern(p[i])
     logit(p[i]) = b0 + b[1]*V1[i] + b[2]*V2[i] + b[3]*V3[i] + b[4]*V4[i] + b[5]*V5[i] + b[6]*V6[i] + b[7]*V7[i] + b[8]*V8[i] + b[9]*V9[i] + b[10]*V10[i] + b[11]*V11[i] + b[12]*V12[i] + b[12]*V12[i] + b[13]*V13[i] + b[14]*V14[i] + b[15]*V15[i] + b[16]*V16[i] + b[17]*V17[i] + b[18]*V18[i] + b[19]*V19[i] + b[20]*V20[i] + b[21]*V21[i] + b[22]*V22[i] + b[23]*V23[i] + b[24]*V24[i] + b[25]*V25[i] + b[26]*V26[i] + b[27]*V27[i] + b[28]*V28[i]
   }
@@ -48,7 +48,7 @@ model_string = "model{
   # We chouse priors for the parameters
   b0 ~ dnorm(1.0, 1/25)               # Equivallent to a non-informative prior
   for (j in 1:28){  
-    b[j] ~ ddexp(0.0, sqrt(2.0))
+    b[j] ~ ddexp(0.0, 1)
   }
 }"
 ```
@@ -58,7 +58,7 @@ model_string = "model{
 set.seed(912)
 
 # Jags takes input as list
-data_jags = list(Class=dat$Class, V1=dat[,'V1'], V2=dat[,'V2'], V3=dat[,'V3'], V4=dat[,'V4'], V5=dat[,'V5'], V6=dat[,'V6'], V7=dat[,'V7'], V8=dat[,'V8'], V9=dat[,'V9'], V10=dat[,'V10'], V11=dat[,'V11'], V12=dat[,'V12'], V13=dat[,'V13'], V14=dat[,'V14'], V15=dat[,'V15'], V16=dat[,'V16'], V17=dat[,'V17'], V18=dat[,'V18'], V19=dat[,'V19'], V20=dat[,'V20'], V21=dat[,'V21'], V22=dat[,'V22'], V23=dat[,'V23'], V24=dat[,'V24'], V25=dat[,'V25'], V26=dat[,'V26'],V27=dat[,'V27'], V28=dat[,'V28'])
+data_jags = list(y=dat$Class, V1=dat[,'V1'], V2=dat[,'V2'], V3=dat[,'V3'], V4=dat[,'V4'], V5=dat[,'V5'], V6=dat[,'V6'], V7=dat[,'V7'], V8=dat[,'V8'], V9=dat[,'V9'], V10=dat[,'V10'], V11=dat[,'V11'], V12=dat[,'V12'], V13=dat[,'V13'], V14=dat[,'V14'], V15=dat[,'V15'], V16=dat[,'V16'], V17=dat[,'V17'], V18=dat[,'V18'], V19=dat[,'V19'], V20=dat[,'V20'], V21=dat[,'V21'], V22=dat[,'V22'], V23=dat[,'V23'], V24=dat[,'V24'], V25=dat[,'V25'], V26=dat[,'V26'],V27=dat[,'V27'], V28=dat[,'V28'])
 
 # Parameters that we would wanna monitor
 params = c('b0','b')
@@ -70,19 +70,138 @@ update(mod1, 1e3)
 
 mod1_sim = coda.samples(model=mod1, variable.names = params, n.iter = 5e3)
 ```
-
+# Trace Plot:
+* The trace plots looks good it seems that the mcmc sampling converges. But all the paramets look a bit like the normal curve, It seems very hard to make sense out of them. In the descriptive analysis we clearly saw that there was high collinearity between many features. So here we it seems reasonable to perform PCA dimensionality reduction keeping 95 - 99 % of variability in explaining the response.
 ```{r, fig.width=10, fig.height=10}
+pdf("laplace_prior_bern_lik.pdf",width=20,height=15)
 plot(mod1_sim)
+dev.off
 ```
 
 
 
+```{r}
+gelman.diag(mod1_sim)
+```
+```{r}
+autocorr.diag(mod1_sim)
+pdf("laplace_prior_bern_lik_acorr.pdf",width=20,height=15)
+autocorr.plot(mod1_sim)
+dev.off
+```
 
-
+```{r}
+dic1 = dic.samples(mod1, n.iter=1e3)
+dic1
+```
 
 # Dimensional Reduction Technique: PCA:
-* We saw that many variables were correlated and the laplace prior for the parameters for all are very close to 
+* PCA required the data to be scalled. Our data here is properly scalled, but just to be confident, lets rescaled them.
+* We assume that th variable "Amount" would be significant, and we apply PCA for variables from V1 to V28
+
+#### Findings:
+* It seems 39% of the variability is explained by the first component.
+* It can be seen from the variability plot that first 20 variable explains appx 98% of the variability, which is not bad, if we can reduce our feature dimensions by 10 pricipal components we remove some amound of multicollinearity. We choose 20 becasue in both the variability plot and cumulative variability plot we see that the variability exponential dies after 20.
+```{r}
+
+# Scale the data
+dat.scaled = scale(dat[,2:29])
+head(dat.scaled)
+
+# Perform PCA
+dat.pca = prcomp(dat.scaled)
+names(dat.pca)
+
+# Just for sanity check see if the columns are 0 mean
+# dat.pca$center
+# dat.pca$scale
+
+# Check the C
+dat.pca$rotation[1:5, 1:5]
+biplot(dat.pca, scale = 0)
 
 
+# Get the proportion of variability explained by each variable
+std_dev = dat.pca$sdev
+pr_var = std_dev^2
+pr_varexp = pr_var/sum(pr_var)
 
+# Plot the explained variability
+plot(pr_varexp, xlab = "Principal Component",
+             ylab = "Proportion of Variance Explained",
+             type = "b")
+
+plot(cumsum(pr_varexp), xlab = "Principal Component",
+              ylab = "Cumulative Proportion of Variance Explained",
+              type = "b")
+
+dat.reduced = dat.pca$x[,1:21]
+head(dat.reduced)
+```
+
+
+```{r}
+# we cav see that except for the diagonal elements all other quantities are ~ 0 , which means PCA did work quite fine.
+(t(dat.reduced) %*% dat.reduced)[1:4,1:4]
+```
+
+# 
+```{r}
+library('rjags')
+model2_string = "model{
+    for (i in 1: length(y)){
+        y[i] ~ dbern(p[i])
+        logit(p[i]) = b0 + b[1] * PC1[i] + b[2] * PC2[i] + b[3] * PC3[i] + b[4] * PC4[i] + b[5] * PC5[i] + b[6] * PC6[i] + b[7] * PC7[i] + b[8] * PC8[i] + b[9] * PC9[i] + b[10] * PC10[i] + b[11] * PC11[i] + b[12] * PC12[i] + b[12] * PC12[i] + b[13] * PC13[i] + b[14] * PC14[i] + b[15] * PC15[i] + b[16] * PC16[i] + b[17] * PC17[i] + b[18] * PC18[i] + b[19] * PC19[i] + b[20] *PC20[i]
+        }
+
+  # We chouse priors for the parameters
+  b0 ~ dnorm(1.0, 1 / 25)  # EquiPCallent to a non-informatiPCe prior
+  for (j in 1: 20){
+    b[j] ~ ddexp(0.0, sqrt(2.0))
+  }
+}"
+```
+
+```{r}
+set.seed(912)
+
+# Jags takes input as list
+data2_jags = list(y=dat$Class, PC1=dat.reduced[,'PC1'], PC2=dat.reduced[,'PC2'], PC3=dat.reduced[,'PC3'], PC4=dat.reduced[,'PC4'], PC5=dat.reduced[,'PC5'], PC6=dat.reduced[,'PC6'], PC7=dat.reduced[,'PC7'], PC8=dat.reduced[,'PC8'], PC9=dat.reduced[,'PC9'], PC10=dat.reduced[,'PC10'], PC11=dat.reduced[,'PC11'], PC12=dat.reduced[,'PC12'], PC13=dat.reduced[,'PC13'], PC14=dat.reduced[,'PC14'], PC15=dat.reduced[,'PC15'], PC16=dat.reduced[,'PC16'], PC17=dat.reduced[,'PC17'], PC18=dat.reduced[,'PC18'], PC19=dat.reduced[,'PC19'], PC20=dat.reduced[,'PC20'])
+
+# Parameters that we would wanna monitor
+params = c('b0','b')
+
+mod2 = jags.model(textConnection(model2_string), data=data2_jags, n.chains = 3)
+
+# Burn-in period
+update(mod1, 1e3)
+
+mod2_sim = coda.samples(model=mod2, variable.names = params, n.iter = 5e3)
+```
+
+# Findings:
+* b[1], b[3] -> It seems the trace plot ihas not really converged well, there seems to be high autocorrelation between samples. We should run the smapling for many more iteration
+```{r, fig.width=14, fig.height=15}
+pdf("pca_laplace_prior_bern_lik.pdf",width=20,height=15)
+plot(mod2_sim)
+dev.off
+```
+
+```{r}
+dic2 = dic.samples(mod2, n.iter=1e3)
+dic2
+```
+
+
+# Gelman Statistics:
+* Looks good the values are smaller and appx 1.
+```{r}
+gelman.diag(mod2_sim)
+```
+
+
+```{r}
+autocorr.diag(mod2_sim)
+autocorr.plot(mod2_sim)
+```
 
