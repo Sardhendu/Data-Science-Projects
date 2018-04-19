@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f44b8bae-4a94-4ba7-a4dc-46e7a722ad98" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/laplace_prior_bern_lik.pdf" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/laplace_prior_bern_lik.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/modeled_acorr.pdf" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/modeled_acorr.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/modeled_mcmc_trace.pdf" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/modeled_mcmc_trace.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/FeatureModeling.Rmd" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/FeatureModeling.Rmd" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/descriptive_analysis.Rmd" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/descriptive_analysis.Rmd" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/modeling.Rmd" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/modeling.Rmd" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -74,6 +79,8 @@
               <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
+                <marker date="1523642715716" expanded="true" signature="7037:7357" ph="..." />
+                <marker date="1523642715716" expanded="true" signature="7217:7357" ph="..." />
               </folding>
             </state>
           </provider>
@@ -82,8 +89,8 @@
       <file leaf-file-name="autoencoders.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models/autoencoders.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="803">
-              <caret line="45" column="25" lean-forward="false" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="97" />
+            <state relative-caret-position="463">
+              <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
               </folding>
@@ -238,7 +245,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="width" value="2560" />
     <option name="height" value="1080" />
   </component>
@@ -549,10 +556,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3040057" sideWeight="0.842711" order="2" side_tool="false" content_ui="combo" x="332" y="23" width="291" height="877" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15522175" sideWeight="0.842711" order="2" side_tool="false" content_ui="combo" x="332" y="23" width="291" height="877" />
       <window_info id="TODO" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904148" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32943925" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3040057" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -675,6 +682,8 @@
           <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
+            <marker date="1523642715716" expanded="true" signature="7037:7357" ph="..." />
+            <marker date="1523642715716" expanded="true" signature="7217:7357" ph="..." />
           </folding>
         </state>
       </provider>
@@ -749,11 +758,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="460">
@@ -763,11 +767,16 @@
           <second_editor />
         </state>
       </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/models/autoencoders.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="803">
-          <caret line="45" column="25" lean-forward="false" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="97" />
+        <state relative-caret-position="463">
+          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
           </folding>

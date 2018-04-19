@@ -26,7 +26,7 @@ head(dat)
 ### Laplace prior:
 ```{r}
 ddexp = function(x, mu, tau){
-  0.5*tau*exp(-tau*abs(x-mu))
+  1*tau*exp(-tau*abs(x-mu))
 }
 
 curve(ddexp(x, mu=0.0, tau=1.0), from=-10.0, to=10.0, ylab="density", main='Double exponential distribution')
@@ -48,8 +48,10 @@ model_string = "model{
   # We chouse priors for the parameters
   b0 ~ dnorm(1.0, 1/25)               # Equivallent to a non-informative prior
   for (j in 1:28){  
-    b[j] ~ ddexp(0.0, 1)
+    b[j] ~ ddexp(0.0, lambda)
   }
+
+  lambda ~ dunif(0.001,1000) #10
 }"
 ```
 
@@ -73,7 +75,7 @@ mod1_sim = coda.samples(model=mod1, variable.names = params, n.iter = 5e3)
 # Trace Plot:
 * The trace plots looks good it seems that the mcmc sampling converges. But all the paramets look a bit like the normal curve, It seems very hard to make sense out of them. In the descriptive analysis we clearly saw that there was high collinearity between many features. So here we it seems reasonable to perform PCA dimensionality reduction keeping 95 - 99 % of variability in explaining the response.
 ```{r, fig.width=10, fig.height=10}
-pdf("laplace_prior_bern_lik.pdf",width=20,height=15)
+pdf("laplace_prior_bern_lik_sd1000.pdf",width=20,height=15)
 plot(mod1_sim)
 dev.off
 ```

@@ -9,13 +9,15 @@ output: pdf_document
 ```{r}
 data_dir = '/Users/sam/All-Program/App-DataSet/DataScienceProjects/CreditCardFraud/creditcard.csv'
 dat = read.csv(data_dir)
+dim(dat)
 head(dat)
 ```
 
 ```{r}
 # Sample a subset of the data.
 set.seed(619)
-not_fraud = fraud_data[which(dat$Class == 0),]
+fraud = dat[which(dat$Class == 1),]
+not_fraud = dat[which(dat$Class == 0),]
 dim(fraud)
 dim(not_fraud)
 ```
@@ -52,7 +54,9 @@ write.csv(dat_set, file = paste(outpath,"sample_credit_fraud.csv"))
 * Therefore, it seems a good idea to do variable selection using Laplace or double exponential dist (Lasso)
 * For some variables there seems to be a curve relationship
 ```{r, fig.width=14, fig.height=15}
-pairs(dat_set[,1:10])
+png(filename="pairplot.png", width = 1000, height = 1000)
+pairs(dat_set[,2:20])
+dev.off
 ```
 
 * Again here variable v16, v17, v18 are highly coorelated. Variable v11 and v12 are again very highly coorelated. We should again apply feature selection here.
@@ -170,17 +174,130 @@ n_fraud_cases$cat <- 'not_fraud'
 
 dataaV10 = rbind(fraud_cases, n_fraud_cases)
 
+###############
 
-ggplot(dataaV1, aes(V1, fill = cat)) + geom_density(alpha = 0.2)
-ggplot(dataaV2, aes(V2, fill = cat)) + geom_density(alpha = 0.2)
-ggplot(dataaV3, aes(V3, fill = cat)) + geom_density(alpha = 0.2)
-ggplot(dataaV4, aes(V4, fill = cat)) + geom_density(alpha = 0.2)
-ggplot(dataaV5, aes(V5, fill = cat)) + geom_density(alpha = 0.2)
-ggplot(dataaV6, aes(V6, fill = cat)) + geom_density(alpha = 0.2)
-ggplot(dataaV7, aes(V7, fill = cat)) + geom_density(alpha = 0.2)
-ggplot(dataaV8, aes(V8, fill = cat)) + geom_density(alpha = 0.2)
-ggplot(dataaV9, aes(V9, fill = cat)) + geom_density(alpha = 0.2)
-ggplot(dataaV10, aes(V10, fill = cat)) + geom_density(alpha = 0.2)
+fraud_cases = data.frame(V11=dat_set[which(dat_set$Class == 1),]$V11)
+n_fraud_cases = data.frame(V11=dat_set[which(dat_set$Class == 0),]$V11)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV11 = rbind(fraud_cases, n_fraud_cases)
+
+###############
+
+fraud_cases = data.frame(V12=dat_set[which(dat_set$Class == 1),]$V12)
+n_fraud_cases = data.frame(V12=dat_set[which(dat_set$Class == 0),]$V12)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV12 = rbind(fraud_cases, n_fraud_cases)
+
+###############
+
+fraud_cases = data.frame(V13=dat_set[which(dat_set$Class == 1),]$V13)
+n_fraud_cases = data.frame(V13=dat_set[which(dat_set$Class == 0),]$V13)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV13 = rbind(fraud_cases, n_fraud_cases)
+
+###############
+
+fraud_cases = data.frame(V14=dat_set[which(dat_set$Class == 1),]$V14)
+n_fraud_cases = data.frame(V14=dat_set[which(dat_set$Class == 0),]$V14)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV14 = rbind(fraud_cases, n_fraud_cases)
+
+###############
+
+fraud_cases = data.frame(V15=dat_set[which(dat_set$Class == 1),]$V15)
+n_fraud_cases = data.frame(V15=dat_set[which(dat_set$Class == 0),]$V15)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV15 = rbind(fraud_cases, n_fraud_cases)
+
+###############
+
+fraud_cases = data.frame(V16=dat_set[which(dat_set$Class == 1),]$V16)
+n_fraud_cases = data.frame(V16=dat_set[which(dat_set$Class == 0),]$V16)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV16 = rbind(fraud_cases, n_fraud_cases)
+
+###############
+
+fraud_cases = data.frame(V17=dat_set[which(dat_set$Class == 1),]$V17)
+n_fraud_cases = data.frame(V17=dat_set[which(dat_set$Class == 0),]$V17)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV17 = rbind(fraud_cases, n_fraud_cases)
+
+
+###############
+
+fraud_cases = data.frame(V18=dat_set[which(dat_set$Class == 1),]$V18)
+n_fraud_cases = data.frame(V18=dat_set[which(dat_set$Class == 0),]$V18)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV18 = rbind(fraud_cases, n_fraud_cases)
+###############
+
+fraud_cases = data.frame(V19=dat_set[which(dat_set$Class == 1),]$V19)
+n_fraud_cases = data.frame(V19=dat_set[which(dat_set$Class == 0),]$V19)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV19 = rbind(fraud_cases, n_fraud_cases)
+
+###############
+
+fraud_cases = data.frame(V20=dat_set[which(dat_set$Class == 1),]$V20)
+n_fraud_cases = data.frame(V20=dat_set[which(dat_set$Class == 0),]$V20)
+fraud_cases$cat <- 'fraud'
+n_fraud_cases$cat <- 'not_fraud'
+
+dataaV20 = rbind(fraud_cases, n_fraud_cases)
+
+
+
+p1 <- ggplot(dataaV1, aes(V1, fill = cat)) + geom_density(alpha = 0.2)
+p2 <- ggplot(dataaV2, aes(V2, fill = cat)) + geom_density(alpha = 0.2)
+p3 <- ggplot(dataaV3, aes(V3, fill = cat)) + geom_density(alpha = 0.2)
+p4 <- ggplot(dataaV4, aes(V4, fill = cat)) + geom_density(alpha = 0.2)
+p5 <- ggplot(dataaV5, aes(V5, fill = cat)) + geom_density(alpha = 0.2)
+p6 <- ggplot(dataaV6, aes(V6, fill = cat)) + geom_density(alpha = 0.2)
+p7 <- ggplot(dataaV7, aes(V7, fill = cat)) + geom_density(alpha = 0.2)
+p8 <- ggplot(dataaV8, aes(V8, fill = cat)) + geom_density(alpha = 0.2)
+p9 <- ggplot(dataaV9, aes(V9, fill = cat)) + geom_density(alpha = 0.2)
+p10 <- ggplot(dataaV10, aes(V10, fill = cat)) + geom_density(alpha = 0.2)
+p11 <- ggplot(dataaV11, aes(V11, fill = cat)) + geom_density(alpha = 0.2)
+p12 <- ggplot(dataaV12, aes(V12, fill = cat)) + geom_density(alpha = 0.2)
+p13 <- ggplot(dataaV13, aes(V13, fill = cat)) + geom_density(alpha = 0.2)
+p14 <- ggplot(dataaV14, aes(V14, fill = cat)) + geom_density(alpha = 0.2)
+p15 <- ggplot(dataaV15, aes(V15, fill = cat)) + geom_density(alpha = 0.2)
+p16 <- ggplot(dataaV16, aes(V16, fill = cat)) + geom_density(alpha = 0.2)
+p17 <- ggplot(dataaV17, aes(V17, fill = cat)) + geom_density(alpha = 0.2)
+p18 <- ggplot(dataaV18, aes(V18, fill = cat)) + geom_density(alpha = 0.2)
+p19 <- ggplot(dataaV19, aes(V19, fill = cat)) + geom_density(alpha = 0.2)
+p20 <- ggplot(dataaV20, aes(V20, fill = cat)) + geom_density(alpha = 0.2)
+
+
+
+
+library(gtable)
+library(grid)
+library(gridExtra)
+png(filename="distribution_plot.png", width=2000, height=1000)
+plot(grid.arrange(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20, nrow = 5))
+dev.off
+
+
 ```
 
 
