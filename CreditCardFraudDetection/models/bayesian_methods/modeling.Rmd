@@ -5,13 +5,34 @@ date: "4/15/2018"
 output: pdf_document
 ---
 
+
 ```{r}
 outpath = '/Users/sam/All-Program/App-DataSet/DataScienceProjects/CreditCardFraud/'
 dat = read.csv(paste(outpath,"sample_credit_fraud.csv"))
-dat$Amount = scale(dat$Amount)[,1]
-dim(dat)
-head(dat)
+dat.scaled = cbind(scale(dat[,2:30]), dat[,31])
+colnames(dat.scaled)[30] <- c("Class")
+colMeans(dat.scaled)
+head(dat.scaled, 2)
 ```
+
+```{r}
+library(caret)
+
+stratifiedSampling <- function(dataIN, sample_on_col, trainPrcnt){
+  trainIndices <- createDataPartition(y=dataIN[,sample_on_col], p=trainPrcnt, list=FALSE)
+  trainData <- dataIN[trainIndices,]
+  testData <- dataIN[-trainIndices,]
+  
+  stopifnot(nrow(trainData) + nrow(testData) == nrow(dataIN))
+  return (list(trainData, testData))
+}
+
+dataOUT <- stratifiedSampling(dataIN=dat.scaled, sample_on_col='Class', trainPrcnt = 0.9)
+dat.train <- dataOUT[[1]]
+dat.test <- dataOUT[[2]]
+
+```
+
 
 ```{r}
 library('rjags')
@@ -32,9 +53,9 @@ model_string = "model{
 ```{r}
 set.seed(632)
 
-dim(dat[,'Amount'])
+dim(dat.scaled[,'Amount'])
 # Jags takes input as list
-data_jags = list(y=dat$Class, V1=dat[,'V1'], V2=dat[,'V2'], V3=dat[,'V3'], V4=dat[,'V4'], V5=dat[,'V5'], V6=dat[,'V6'], V7=dat[,'V7'], V8=dat[,'V8'], V9=dat[,'V9'], V10=dat[,'V10'], V11=dat[,'V11'], V12=dat[,'V12'], V13=dat[,'V13'], V14=dat[,'V14'], V15=dat[,'V15'], V16=dat[,'V16'], V17=dat[,'V17'], V18=dat[,'V18'], V19=dat[,'V19'], V20=dat[,'V20'], V21=dat[,'V21'], V22=dat[,'V22'], V23=dat[,'V23'], V24=dat[,'V24'], V25=dat[,'V25'], V26=dat[,'V26'],V27=dat[,'V27'], V28=dat[,'V28'], amount=dat[,'Amount'])
+data_jags = list(y=dat.train[,'Class'], V1=dat.train[,'V1'], V2=dat.train[,'V2'], V3=dat.train[,'V3'], V4=dat.train[,'V4'], V5=dat.train[,'V5'], V6=dat.train[,'V6'], V7=dat.train[,'V7'], V8=dat.train[,'V8'], V9=dat.train[,'V9'], V10=dat.train[,'V10'], V11=dat.train[,'V11'], V12=dat.train[,'V12'], V13=dat.train[,'V13'], V14=dat.train[,'V14'], V15=dat.train[,'V15'], V16=dat.train[,'V16'], V17=dat.train[,'V17'], V18=dat.train[,'V18'], V19=dat.train[,'V19'], V20=dat.train[,'V20'], V21=dat.train[,'V21'], V22=dat.train[,'V22'], V23=dat.train[,'V23'], V24=dat.train[,'V24'], V25=dat.train[,'V25'], V26=dat.train[,'V26'],V27=dat.train[,'V27'], V28=dat.train[,'V28'], amount=dat.train[,'Amount'])
 
 # Parameters that we would wanna monitor
 params = c('b0','b')
@@ -44,13 +65,13 @@ mod3 = jags.model(textConnection(model_string), data=data_jags, n.chains = 3)
 # Burn-in period
 update(mod3, 1e3)
 
-mod3_sim = coda.samples(model=mod3, variable.names = params, n.iter = 5e3)
+mod3_sim = coda.samples(model=mod3, variable.names = params, n.iter = 10e3)
 
 mod3_csim = as.mcmc(do.call(rbind, mod3_sim))
 ```
 
 ```{r, fig.width=10, fig.height=10}
-pdf("modeled_mcmc_trace.pdf",width=20,height=15)
+pdf("modeled_mcmc_fullmodel_trace.pdf", width=20, height=20)
 plot(mod3_sim)
 dev.off
 ```
@@ -60,7 +81,7 @@ gelman.diag(mod3_sim)
 ```
 ```{r}
 autocorr.diag(mod1_sim)
-pdf("modeled_acorr.pdf",width=20,height=15)
+pdf("modeled_mcmc_fullmodel_acorr.pdf",width=20,height=15)
 autocorr.plot(mod1_sim)
 dev.off
 ```
@@ -73,10 +94,97 @@ dic1 = dic.samples(mod3, n.iter=1e3)
 dic1
 ```
 
-# PREDICTIONS:
+# TRAINING PREDICTIONS:
 ```{r}
 pm_coef = colMeans(mod3_csim) # Get the means of the b coefficient. Also equivallent to getting the learned parameters
-pm_Xb = pm_coef ['b0'] + X[, c(1,4,6)] %*% pm_coef[1:3]
-head(pm_Xb)
+pm_Xb = pm_coef ['b0'] + dat.train[, 1:29] %*% pm_coef[1:29]
+
+phat = 1.0 / (1.0 + exp(-pm_Xb))
+head(phat)
+```
+
+# ANALYSIS
+```{r}
+library(ggplot2)
+
+performanceMetric <- function (cutoffRange, y, y_hat){
+    y_bin <- y_hat
+    actualYesIndex <- which(y==1)
+#     perfMetric <- data.frame()
+    perfMetric <- matrix(0,length(cutoffRange),3)    # 3 is because we calculate accuracy, recall and precision
+    for (i in 1:length(cutoffRange)){
+#         print (cutOFF)
+        predYesIndex <- which(y_hat>=cutoffRange[i])
+        bothYesIndex <- intersect(actualYesIndex,predYesIndex)
+
+        # Get the Binomial prediction based on cut-off value
+        y_bin[predYesIndex] <- 1
+        y_bin[-predYesIndex] <- 0
+
+        # Calculate the accuracy, precision and recall
+        accuracy <- length(which(y_bin == y))/length(y)
+        precision <- length(bothYesIndex)/length(predYesIndex)
+        recall <- length(bothYesIndex)/length(actualYesIndex)
+        cbind(accuracy, precision, recall)
+        
+        perfMetric[i,] <- cbind(accuracy, precision, recall)
+    }
+    
+    return (perfMetric)
+ 
+}
+
+plotPerfMetric <- function(performanceDF, cutoffRange){
+    p <- ggplot() + 
+      geom_line(data = performanceDF, aes(x = cutoffRange, y = accuracy, color = "accuracy")) +
+      geom_line(data = performanceDF, aes(x = cutoffRange, y = precision, color = "precision")) +
+      geom_line(data = performanceDF, aes(x = cutoffRange, y = recall, color = "recall")) +
+      xlab('Cutoff') +
+      ylab('percent.change')
+    return (p)
+}
+
+# cbind(phat, dat$Class)
+
+cutoffRange <- seq(.01,.99,length=1000)
+perfMatrix <- performanceMetric(cutoffRange = cutoffRange, 
+                                y = dat.train[,'Class'], 
+                                y_hat = phat)
+
+perfDF <- data.frame(perfMatrix)
+names(perfDF) <- c('accuracy', 'precision', 'recall')
+head(perfDF)
+
+# Plot Accuracy, precision and recall
+options(repr.plot.width=6, repr.plot.height=4)
+p <- plotPerfMetric(perfDF, cutoffRange)
+p
+```
+
+
+# TEST PREDICTIONS:
+```{r}
+pm_coef = colMeans(mod3_csim) # Get the means of the b coefficient. Also equivallent to getting the learned parameters
+pm_Xb = pm_coef ['b0'] + dat.test[, 1:29] %*% pm_coef[1:29]
+
+phat = 1.0 / (1.0 + exp(-pm_Xb))
+head(phat)
+```
+```{r}
+# cbind(phat, dat$Class)
+
+cutoffRange <- seq(.01,.99,length=1000)
+perfMatrix <- performanceMetric(cutoffRange = cutoffRange, 
+                                y = dat.test[,'Class'], 
+                                y_hat = phat)
+
+perfDF <- data.frame(perfMatrix)
+names(perfDF) <- c('accuracy', 'precision', 'recall')
+head(perfDF)
+
+# Plot Accuracy, precision and recall
+options(repr.plot.width=6, repr.plot.height=4)
+p <- plotPerfMetric(perfDF, cutoffRange)
+p
 ```
 

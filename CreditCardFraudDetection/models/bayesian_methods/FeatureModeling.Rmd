@@ -11,8 +11,10 @@ In teh previous section of bayesian modeling we just tool a sample out of the cr
 ```{r}
 outpath = '/Users/sam/All-Program/App-DataSet/DataScienceProjects/CreditCardFraud/'
 dat = read.csv(paste(outpath,"sample_credit_fraud.csv"))
-dim(dat)
-head(dat)
+dat.scaled = cbind(scale(dat[,2:30]), dat[,31])
+colnames(dat.scaled)[30] <- c("Class")
+colMeans(dat.scaled)
+head(dat.scaled, 2)
 ```
 
 
@@ -42,16 +44,16 @@ library('rjags')
 model_string = "model{
   for (i in 1:length(y)){
     y[i] ~ dbern(p[i])
-    logit(p[i]) = b0 + b[1]*V1[i] + b[2]*V2[i] + b[3]*V3[i] + b[4]*V4[i] + b[5]*V5[i] + b[6]*V6[i] + b[7]*V7[i] + b[8]*V8[i] + b[9]*V9[i] + b[10]*V10[i] + b[11]*V11[i] + b[12]*V12[i] + b[12]*V12[i] + b[13]*V13[i] + b[14]*V14[i] + b[15]*V15[i] + b[16]*V16[i] + b[17]*V17[i] + b[18]*V18[i] + b[19]*V19[i] + b[20]*V20[i] + b[21]*V21[i] + b[22]*V22[i] + b[23]*V23[i] + b[24]*V24[i] + b[25]*V25[i] + b[26]*V26[i] + b[27]*V27[i] + b[28]*V28[i]
+    logit(p[i]) = b0 + b[1]*V1[i] + b[2]*V2[i] + b[3]*V3[i] + b[4]*V4[i] + b[5]*V5[i] + b[6]*V6[i] + b[7]*V7[i] + b[8]*V8[i] + b[9]*V9[i] + b[10]*V10[i] + b[11]*V11[i] + b[12]*V12[i] + b[13]*V13[i] + b[14]*V14[i] + b[15]*V15[i] + b[16]*V16[i] + b[17]*V17[i] + b[18]*V18[i] + b[19]*V19[i] + b[20]*V20[i] + b[21]*V21[i] + b[22]*V22[i] + b[23]*V23[i] + b[24]*V24[i] + b[25]*V25[i] + b[26]*V26[i] + b[27]*V27[i] + b[28]*V28[i] + b[29]*amount[i]
   }
   
   # We chouse priors for the parameters
   b0 ~ dnorm(1.0, 1/25)               # Equivallent to a non-informative prior
-  for (j in 1:28){  
+  for (j in 1:29){  
     b[j] ~ ddexp(0.0, lambda)
   }
 
-  lambda ~ dunif(0.001,1000) #10
+  lambda ~ dunif(0.001,100) #10
 }"
 ```
 
@@ -60,7 +62,7 @@ model_string = "model{
 set.seed(912)
 
 # Jags takes input as list
-data_jags = list(y=dat$Class, V1=dat[,'V1'], V2=dat[,'V2'], V3=dat[,'V3'], V4=dat[,'V4'], V5=dat[,'V5'], V6=dat[,'V6'], V7=dat[,'V7'], V8=dat[,'V8'], V9=dat[,'V9'], V10=dat[,'V10'], V11=dat[,'V11'], V12=dat[,'V12'], V13=dat[,'V13'], V14=dat[,'V14'], V15=dat[,'V15'], V16=dat[,'V16'], V17=dat[,'V17'], V18=dat[,'V18'], V19=dat[,'V19'], V20=dat[,'V20'], V21=dat[,'V21'], V22=dat[,'V22'], V23=dat[,'V23'], V24=dat[,'V24'], V25=dat[,'V25'], V26=dat[,'V26'],V27=dat[,'V27'], V28=dat[,'V28'])
+data_jags = list(y=dat.scaled[,'Class'], V1=dat.scaled[,'V1'], V2=dat.scaled[,'V2'], V3=dat.scaled[,'V3'], V4=dat.scaled[,'V4'], V5=dat.scaled[,'V5'], V6=dat.scaled[,'V6'], V7=dat.scaled[,'V7'], V8=dat.scaled[,'V8'], V9=dat.scaled[,'V9'], V10=dat.scaled[,'V10'], V11=dat.scaled[,'V11'], V12=dat.scaled[,'V12'], V13=dat.scaled[,'V13'], V14=dat.scaled[,'V14'], V15=dat.scaled[,'V15'], V16=dat.scaled[,'V16'], V17=dat.scaled[,'V17'], V18=dat.scaled[,'V18'], V19=dat.scaled[,'V19'], V20=dat.scaled[,'V20'], V21=dat.scaled[,'V21'], V22=dat.scaled[,'V22'], V23=dat.scaled[,'V23'], V24=dat.scaled[,'V24'], V25=dat.scaled[,'V25'], V26=dat.scaled[,'V26'],V27=dat.scaled[,'V27'], V28=dat.scaled[,'V28'], amount=dat.scaled[,'Amount'])
 
 # Parameters that we would wanna monitor
 params = c('b0','b')
@@ -75,7 +77,7 @@ mod1_sim = coda.samples(model=mod1, variable.names = params, n.iter = 5e3)
 # Trace Plot:
 * The trace plots looks good it seems that the mcmc sampling converges. But all the paramets look a bit like the normal curve, It seems very hard to make sense out of them. In the descriptive analysis we clearly saw that there was high collinearity between many features. So here we it seems reasonable to perform PCA dimensionality reduction keeping 95 - 99 % of variability in explaining the response.
 ```{r, fig.width=10, fig.height=10}
-pdf("laplace_prior_bern_lik_sd1000.pdf",width=20,height=15)
+pdf("laplace_prior_bern_lik_sd100.pdf",width=20,height=15)
 plot(mod1_sim)
 dev.off
 ```
