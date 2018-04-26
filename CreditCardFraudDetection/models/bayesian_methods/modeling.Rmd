@@ -3,21 +3,23 @@ title: "Modeling"
 author: "Sardhendu Mishra"
 date: "4/15/2018"
 output: pdf_document
+rm(list=ls())
 ---
 
 
 ```{r}
 outpath = '/Users/sam/All-Program/App-DataSet/DataScienceProjects/CreditCardFraud/'
-dat = read.csv(paste(outpath,"sample_credit_fraud.csv"))
+dat = read.csv(paste(outpath,"sample_new_credit_fraud.csv"))
 dat.scaled = cbind(scale(dat[,2:30]), dat[,31])
 colnames(dat.scaled)[30] <- c("Class")
 colMeans(dat.scaled)
+dim(dat.scaled)
 head(dat.scaled, 2)
 ```
 
 ```{r}
 library(caret)
-
+set.seed(762)
 stratifiedSampling <- function(dataIN, sample_on_col, trainPrcnt){
   trainIndices <- createDataPartition(y=dataIN[,sample_on_col], p=trainPrcnt, list=FALSE)
   trainData <- dataIN[trainIndices,]
@@ -27,10 +29,34 @@ stratifiedSampling <- function(dataIN, sample_on_col, trainPrcnt){
   return (list(trainData, testData))
 }
 
-dataOUT <- stratifiedSampling(dataIN=dat.scaled, sample_on_col='Class', trainPrcnt = 0.9)
+dataOUT <- stratifiedSampling(dataIN=dat.scaled, sample_on_col='Class', trainPrcnt = 0.8)
 dat.train <- dataOUT[[1]]
 dat.test <- dataOUT[[2]]
 
+```
+
+```{r}
+dat.train.df = data.frame(dat.train)
+table(dat.train.df$Class)
+7999*100/395
+```
+
+# Oversample:
+```{r}
+library(caret)
+library(DMwR)
+dat.train.df$Class = as.factor(dat.train.df$Class)
+
+dat.train.smote = SMOTE(Class ~ ., dat.train.df, perc.over=2000, perc.under=110)
+table (dat.train.smote$Class)
+
+dat.train.smote.sc = cbind(scale(dat.train.smote[,1:29]), dat.train.smote[,30])
+colnames(dat.train.smote.sc)[30] <- c("Class")
+colMeans(dat.train.smote.sc)
+dim(dat.train.smote.sc)
+head(dat.train.smote.sc, 2)
+
+rownames(dat.train.smote.sc) <- NULL
 ```
 
 
@@ -42,32 +68,203 @@ model_string = "model{
     logit(p[i]) = b0 + b[1]*V1[i] + b[2]*V2[i] + b[3]*V3[i] + b[4]*V4[i] + b[5]*V5[i] + b[6]*V6[i] + b[7]*V7[i] + b[8]*V8[i] + b[9]*V9[i] + b[10]*V10[i] + b[11]*V11[i] + b[12]*V12[i] + b[12]*V12[i] + b[13]*V13[i] + b[14]*V14[i] + b[15]*V15[i] + b[16]*V16[i] + b[17]*V17[i] + b[18]*V18[i] + b[19]*V19[i] + b[20]*V20[i] + b[21]*V21[i] + b[22]*V22[i] + b[23]*V23[i] + b[24]*V24[i] + b[25]*V25[i] + b[26]*V26[i] + b[27]*V27[i] + b[28]*V28[i] + b[29]*amount[i]
   }
   
-  # We chouse priors for the parameters
-  b0 ~ dnorm(1.0, 1/25)               # Equivallent to a non-informative prior
+  # We Choose priors for the parameters
+  b0 ~ dnorm(mu1, 1/sig1)               # Equivallent to a non-informative prior
   for (j in 1:29){  
-    b[j] ~ dnorm(0.0, 1/25.0) 
+    b[j] ~ dnorm(mu2, 1/sig2) 
   }
+}"
+
+model_string_2 = "model{
+  for (i in 1:length(y)){
+    y[i] ~ dbern(p[i])
+    logit(p[i]) = b0 + b1*V1[i] + b2*V2[i] + b3*V3[i] + b4*V4[i] + b5*V5[i] + b6*V6[i] + b7*V7[i] + b8*V8[i] + b9*V9[i] + b10*V10[i] + b11*V11[i] + b12*V12[i] + b13*V13[i] + b14*V14[i] + b15*V15[i] + b16*V16[i] + b17*V17[i] + b18*V18[i] + b19*V19[i] + b20*V20[i] + b21*V21[i] + b22*V22[i] + b23*V23[i] + b24*V24[i] + b25*V25[i] + b26*V26[i] + b27*V27[i] + b28*V28[i] + b29*amount[i]
+  }
+  
+  # We Choose priors for the parameters
+  b0 ~ dnorm(mu0, 1/sig0)            
+  b1 ~ dnorm(mu1, 1/sig1)
+  b2 ~ dnorm(mu2, 1/sig2)
+  b3 ~ dnorm(mu3, 1/sig3)
+  b4 ~ dnorm(mu4, 1/sig4)
+  b5 ~ dnorm(mu5, 1/sig5)
+  b6 ~ dnorm(mu6, 1/sig6)
+  b7 ~ dnorm(mu7, 1/sig7)
+  b8 ~ dnorm(mu8, 1/sig8)
+  b9 ~ dnorm(mu9, 1/sig9)
+  b10 ~ dnorm(mu10, 1/sig10)
+  b11 ~ dnorm(mu11, 1/sig11)
+  b12 ~ dnorm(mu12, 1/sig12)
+  b13 ~ dnorm(mu13, 1/sig13)
+  b14 ~ dnorm(mu14, 1/sig14)
+  b15 ~ dnorm(mu15, 1/sig15)
+  b16 ~ dnorm(mu16, 1/sig16)
+  b17 ~ dnorm(mu17, 1/sig17)
+  b18 ~ dnorm(mu18, 1/sig18)
+  b19 ~ dnorm(mu19, 1/sig19)
+  b20 ~ dnorm(mu20, 1/sig20)
+  b21 ~ dnorm(mu21, 1/sig21)
+  b22 ~ dnorm(mu22, 1/sig22)
+  b23 ~ dnorm(mu23, 1/sig23)
+  b24 ~ dnorm(mu24, 1/sig24)
+  b25 ~ dnorm(mu25, 1/sig25)
+  b26 ~ dnorm(mu26, 1/sig26)
+  b27 ~ dnorm(mu27, 1/sig27)
+  b28 ~ dnorm(mu28, 1/sig28)
+  b29 ~ dnorm(mu29, 1/sig29)
 }"
 ```
 
 ```{r}
-set.seed(632)
+library(matrixStats)
+set.seed(625)
 
-dim(dat.scaled[,'Amount'])
-# Jags takes input as list
-data_jags = list(y=dat.train[,'Class'], V1=dat.train[,'V1'], V2=dat.train[,'V2'], V3=dat.train[,'V3'], V4=dat.train[,'V4'], V5=dat.train[,'V5'], V6=dat.train[,'V6'], V7=dat.train[,'V7'], V8=dat.train[,'V8'], V9=dat.train[,'V9'], V10=dat.train[,'V10'], V11=dat.train[,'V11'], V12=dat.train[,'V12'], V13=dat.train[,'V13'], V14=dat.train[,'V14'], V15=dat.train[,'V15'], V16=dat.train[,'V16'], V17=dat.train[,'V17'], V18=dat.train[,'V18'], V19=dat.train[,'V19'], V20=dat.train[,'V20'], V21=dat.train[,'V21'], V22=dat.train[,'V22'], V23=dat.train[,'V23'], V24=dat.train[,'V24'], V25=dat.train[,'V25'], V26=dat.train[,'V26'],V27=dat.train[,'V27'], V28=dat.train[,'V28'], amount=dat.train[,'Amount'])
+dat.train.smotels = dat.train.smote.sc
+dat.train.smotels[,'Class'] = dat.train.smotels[,'Class']-1   # We do this becasue rjags takes Bernouli input as 0 and 1 But when we do SMOTE ,, and etc.. we actually convert them to 1 and 2
+dat.train.smotels = dat.train.smotels[sample(nrow(dat.train.smotels), nrow(dat.train.smotels)), ]
 
-# Parameters that we would wanna monitor
-params = c('b0','b')
+how_many_batches = 10
+a = dim(dat.train.smotels)/how_many_batches
+batch_size = round(a[1])
+print (batch_size)
 
-mod3 = jags.model(textConnection(model_string), data=data_jags, n.chains = 3)
+for (i in 2:how_many_batches){
+  print ('RUNNING BATCH ....................... ')
+  print (i)
+  if (i == 1){
+     batch_data = dat.train.smotels[i:batch_size,]
+     # print(i)
+     # print(batch_size)
+     # print(dim(batch_data))
+       # Jags takes input as list
+     data_jags = list(y=batch_data[,'Class'], V1=batch_data[,'V1'], V2=batch_data[,'V2'], V3=batch_data[,'V3'], V4=batch_data[,'V4'], V5=batch_data[,'V5'], V6=batch_data[,'V6'], V7=batch_data[,'V7'], V8=batch_data[,'V8'], V9=batch_data[,'V9'], V10=batch_data[,'V10'], V11=batch_data[,'V11'], V12=batch_data[,'V12'], V13=batch_data[,'V13'], V14=batch_data[,'V14'], V15=batch_data[,'V15'], V16=batch_data[,'V16'], V17=batch_data[,'V17'], V18=batch_data[,'V18'], V19=batch_data[,'V19'], V20=batch_data[,'V20'], V21=batch_data[,'V21'], V22=batch_data[,'V22'], V23=batch_data[,'V23'], V24=batch_data[,'V24'], V25=batch_data[,'V25'], V26=dat.train.smotels[,'V26'],V27=batch_data[,'V27'], V28=batch_data[,'V28'], amount=batch_data[,'Amount'], mu1 = 1.0, sig1 = 25, mu2 = 0, sig2 = 25)
+     
+     # Parameters that we would wanna monitor
+    params = c('b0','b')
+    
+    mod3 = jags.model(textConnection(model_string), data=data_jags, n.chains = 2)
+    
+    # Burn-in period
+    update(mod3, 1e3)
+    
+    mod3_sim = coda.samples(model=mod3, variable.names = params, n.iter = 5e3)
+    
+    mod3_csim = as.mcmc(do.call(rbind, mod3_sim))
+    
+    colmeans = colMeans(mod3_sim[[1]])
+    colsd = colSds(mod3_sim[[1]])
 
-# Burn-in period
-update(mod3, 1e3)
+    out_data_path = '/Users/sam/All-Program/App/DataScienceProjects/CreditCardFraudDetection/models/bayesian_methods/weights.csv'
+    datata = data.frame(colmeans, colsd)
 
-mod3_sim = coda.samples(model=mod3, variable.names = params, n.iter = 10e3)
+    write.csv(datata, file = out_data_path)
+    
+    
+  }
+  else{
+    # print((i-1)*batch_size)
+    # print (i*batch_size)
+    a = (i-1)*batch_size
+    b= i*batch_size
+    batch_data = dat.train.smotels[a:b ,]
+     # print(dim(batch_data))
+   
+    weights = read.csv(out_data_path)
+    
+    b0 = weights[weights$X == 'b0',c("colmeans")]
+    b1 = weights[weights$X == 'b1',c("colmeans")]
+    b2 = weights[weights$X == 'b2',c("colmeans")]
+    b3 = weights[weights$X == 'b3',c("colmeans")]
+    b4=weights[weights$X == 'b4',c("colmeans")]
+    b5=weights[weights$X == 'b5',c("colmeans")]
+    b6=weights[weights$X == 'b6',c("colmeans")]
+    b7=weights[weights$X == 'b7',c("colmeans")]
+    b8=weights[weights$X == 'b8',c("colmeans")]
+    b9=weights[weights$X == 'b9',c("colmeans")]
+    b10=weights[weights$X == 'b10',c("colmeans")]
+    b11=weights[weights$X == 'b11',c("colmeans")]
+    b12=weights[weights$X == 'b12',c("colmeans")]
+    b13=weights[weights$X == 'b13',c("colmeans")]
+    b14=weights[weights$X == 'b14',c("colmeans")]
+    b15=weights[weights$X == 'b15',c("colmeans")]
+    b16=weights[weights$X == 'b16',c("colmeans")]
+    b17=weights[weights$X == 'b17',c("colmeans")]
+    b18=weights[weights$X == 'b18',c("colmeans")]
+    b19=weights[weights$X == 'b19',c("colmeans")]
+    b20=weights[weights$X == 'b20',c("colmeans")]
+    b21=weights[weights$X == 'b21',c("colmeans")]
+    b22=weights[weights$X == 'b22',c("colmeans")]
+    b23=weights[weights$X == 'b23',c("colmeans")]
+    b24=weights[weights$X == 'b24',c("colmeans")]
+    b25=weights[weights$X == 'b25',c("colmeans")]
+    b26=weights[weights$X == 'b26',c("colmeans")]
+    b27=weights[weights$X == 'b27',c("colmeans")]
+    b28=weights[weights$X == 'b28',c("colmeans")]
+    b29=weights[weights$X == 'b29',c("colmeans")]
+    
+    s0 = weights[weights$X == 'b0',c("colsd")]
+    s1 = weights[weights$X == 'b1',c("colsd")]
+    s2 = weights[weights$X == 'b2',c("colsd")]
+    s3 = weights[weights$X == 'b3',c("colsd")]
+    s4=weights[weights$X == 'b4',c("colsd")]
+    s5=weights[weights$X == 'b5',c("colsd")]
+    s6=weights[weights$X == 'b6',c("colsd")]
+    s7=weights[weights$X == 'b7',c("colsd")]
+    s8=weights[weights$X == 'b8',c("colsd")]
+    s9=weights[weights$X == 'b9',c("colsd")]
+    s10=weights[weights$X == 'b10',c("colsd")]
+    s11=weights[weights$X == 'b11',c("colsd")]
+    s12=weights[weights$X == 'b12',c("colsd")]
+    s13=weights[weights$X == 'b13',c("colsd")]
+    s14=weights[weights$X == 'b14',c("colsd")]
+    s15=weights[weights$X == 'b15',c("colsd")]
+    s16=weights[weights$X == 'b16',c("colsd")]
+    s17=weights[weights$X == 'b17',c("colsd")]
+    s18=weights[weights$X == 'b18',c("colsd")]
+    s19=weights[weights$X == 'b19',c("colsd")]
+    s20=weights[weights$X == 'b20',c("colsd")]
+    s21=weights[weights$X == 'b21',c("colsd")]
+    s22=weights[weights$X == 'b22',c("colsd")]
+    s23=weights[weights$X == 'b23',c("colsd")]
+    s24=weights[weights$X == 'b24',c("colsd")]
+    s25=weights[weights$X == 'b25',c("colsd")]
+    s26=weights[weights$X == 'b26',c("colsd")]
+    s27=weights[weights$X == 'b27',c("colsd")]
+    s28=weights[weights$X == 'b28',c("colsd")]
+    s29=weights[weights$X == 'b29',c("colsd")]
+    
+     
+    data_jags = list(y=batch_data[,'Class'], V1=batch_data[,'V1'], V2=batch_data[,'V2'], V3=batch_data[,'V3'], V4=batch_data[,'V4'], V5=batch_data[,'V5'], V6=batch_data[,'V6'], V7=batch_data[,'V7'], V8=batch_data[,'V8'], V9=batch_data[,'V9'], V10=batch_data[,'V10'], V11=batch_data[,'V11'], V12=batch_data[,'V12'], V13=batch_data[,'V13'], V14=batch_data[,'V14'], V15=batch_data[,'V15'], V16=batch_data[,'V16'], V17=batch_data[,'V17'], V18=batch_data[,'V18'], V19=batch_data[,'V19'], V20=batch_data[,'V20'], V21=batch_data[,'V21'], V22=batch_data[,'V22'], V23=batch_data[,'V23'], V24=batch_data[,'V24'], V25=batch_data[,'V25'], V26=dat.train.smotels[,'V26'],V27=batch_data[,'V27'], V28=batch_data[,'V28'], amount=batch_data[,'Amount'], mu0=b0, mu1=b1,mu2=b2, mu3=b3,mu4=b4, mu5=b5,mu6=b6, mu7=b7,mu8=b8, mu9=b9,mu10=b10, mu11=b11,mu12=b12, mu13=b13,mu14=b14,mu15=b15,mu16=b16, mu17=b17,mu18=b18, mu19=b19,mu20=b20, mu21=b21,mu22=b22, mu23=b23,mu24=b24, mu25=b25, mu26=b26,  mu27=b27, mu28=b28,  mu29=b29, sig0=s0, sig1=s1,sig2=s2, sig3=s3,sig4=s4, sig5=s5,sig6=s6, sig7=s7,sig8=s8, sig9=s9,sig10=s10, sig11=s11,sig12=s12, sig13=s13,sig14=s14,sig15=s15,sig16=s16, sig17=s17,sig18=s18, sig19=s19,sig20=s20, sig21=s21,sig22=s22, sig23=s23,sig24=s24, sig25=s25, sig26=s26,  sig27=s27, sig28=s28,  sig29=s29)
+    
+    
+    
+    # Parameters that we would wanna monitor
+    params = c('b0','b1','b2','b3','b4','b5','b6','b7','b8','b9','b10','b11','b12','b13','b14','b15','b16','b17','b18','b19','b20','b21','b22','b23','b24','b25','b26','b27','b28','b29')
+    
+    mod3 = jags.model(textConnection(model_string_2), data=data_jags, n.chains = 2)
+    
+    # Burn-in period
+    update(mod3, 1e3)
+    
+    mod3_sim = coda.samples(model=mod3, variable.names = params, n.iter = 5e3)
+    
+    mod3_csim = as.mcmc(do.call(rbind, mod3_sim))
+    
+    colmeans = colMeans(mod3_sim[[1]])
+    colsd = colSds(mod3_sim[[1]])
+    
+    out_data_path = '/Users/sam/All-Program/App/DataScienceProjects/CreditCardFraudDetection/models/bayesian_methods/weights.csv'
+    datata = data.frame(colmeans, colsd)
 
-mod3_csim = as.mcmc(do.call(rbind, mod3_sim))
+    write.csv(datata, file = out_data_path)
+    
+  }
+}
+```
+
+
+```{r, fig.width=8, fig.height=8}
+plot(mod3_sim)
 ```
 
 ```{r, fig.width=10, fig.height=10}
@@ -80,9 +277,9 @@ dev.off
 gelman.diag(mod3_sim)
 ```
 ```{r}
-autocorr.diag(mod1_sim)
+autocorr.diag(mod3_sim)
 pdf("modeled_mcmc_fullmodel_acorr.pdf",width=20,height=15)
-autocorr.plot(mod1_sim)
+autocorr.plot(mod3_sim)
 dev.off
 ```
 ```{r}
@@ -97,9 +294,11 @@ dic1
 # TRAINING PREDICTIONS:
 ```{r}
 pm_coef = colMeans(mod3_csim) # Get the means of the b coefficient. Also equivallent to getting the learned parameters
-pm_Xb = pm_coef ['b0'] + dat.train[, 1:29] %*% pm_coef[1:29]
-
+pm_Xb = pm_coef ['b0'] + dat.train.smotels[, 1:29] %*% pm_coef[c('b1', 'b2','b3','b4', 'b5','b6','b7', 'b8','b9','b10', 'b11','b12','b13', 'b14','b15','b16', 'b17','b18','b19', 'b20','b21', 'b22','b23','b24', 'b25','b26','b27', 'b28', 'b29')]
+dim(dat.train.smotels)
 phat = 1.0 / (1.0 + exp(-pm_Xb))
+
+dim(phat)
 head(phat)
 ```
 
@@ -148,7 +347,7 @@ plotPerfMetric <- function(performanceDF, cutoffRange){
 
 cutoffRange <- seq(.01,.99,length=1000)
 perfMatrix <- performanceMetric(cutoffRange = cutoffRange, 
-                                y = dat.train[,'Class'], 
+                                y = dat.train.smotels[,'Class'], 
                                 y_hat = phat)
 
 perfDF <- data.frame(perfMatrix)
@@ -165,10 +364,16 @@ p
 # TEST PREDICTIONS:
 ```{r}
 pm_coef = colMeans(mod3_csim) # Get the means of the b coefficient. Also equivallent to getting the learned parameters
-pm_Xb = pm_coef ['b0'] + dat.test[, 1:29] %*% pm_coef[1:29]
-
+pm_Xb = pm_coef ['b0'] + dat.test[, 1:29] %*% pm_coef[c('b1', 'b2','b3','b4', 'b5','b6','b7', 'b8','b9','b10', 'b11','b12','b13', 'b14','b15','b16', 'b17','b18','b19', 'b20','b21', 'b22','b23','b24', 'b25','b26','b27', 'b28', 'b29')]
+dim(dat.train.smotels)
 phat = 1.0 / (1.0 + exp(-pm_Xb))
+
+dim(phat)
 head(phat)
+
+
+dat.train.smotels[,'Class'] = dat.train.smotels[,'Class']-1
+
 ```
 ```{r}
 # cbind(phat, dat$Class)

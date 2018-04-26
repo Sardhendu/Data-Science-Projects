@@ -49,6 +49,30 @@ dat.reduced = dat.pca$x[,1:25]
 head(dat.reduced)
 ```
 
+```{r}
+library(caret)
+
+stratifiedSampling <- function(dataIN, sample_on_col, trainPrcnt){
+  trainIndices <- createDataPartition(y=dataIN[,sample_on_col], p=trainPrcnt, list=FALSE)
+  trainData <- dataIN[trainIndices,]
+  testData <- dataIN[-trainIndices,]
+  
+  stopifnot(nrow(trainData) + nrow(testData) == nrow(dataIN))
+  return (list(trainData, testData))
+}
+
+dataIN = cbind(dat.reduced, dat[,'Class'])
+colnames(dataIN)[26] <- c("Class")
+dataOUT <- stratifiedSampling(dataIN=dataIN, sample_on_col='Class', trainPrcnt = 0.9)
+dat.train <- dataOUT[[1]]
+dat.test <- dataOUT[[2]]
+```
+
+```{r}
+dim(dat.train)
+dim(dat.test)
+```
+
 
 ```{r}
 library('rjags')
@@ -57,22 +81,21 @@ model_string = "model{
     y[i] ~ dbern(p[i])
     logit(p[i]) = b0 + b[1] * PC1[i] + b[2] * PC2[i] + b[3] * PC3[i] + b[4] * PC4[i] + b[5] * PC5[i] + b[6] * PC6[i] + b[7] * PC7[i] + b[8] * PC8[i] + b[9] * PC9[i] + b[10] * PC10[i] + b[11] * PC11[i] + b[12] * PC12[i] + b[13] * PC13[i] + b[14] * PC14[i] + b[15] * PC15[i] + b[16] * PC16[i] + b[17] * PC17[i] + b[18] * PC18[i] + b[19] * PC19[i] + b[20] *PC20[i] + b[21] *PC21[i] + b[22] *PC22[i] + b[23] *PC23[i] + b[24] *PC24[i] + b[25]*PC25[i]
         }
-  }
   
-  # We chouse priors for the parameters
-  b0 ~ dnorm(1.0, 1/25)               # Equivallent to a non-informative prior
-  for (j in 1:25){  
+  b0 ~ dnorm(1.0, 1/25)            
+  for (j in 1:26){  
     b[j] ~ dnorm(0.0, 1/25.0) 
   }
 }"
+
+
 ```
 
 ```{r}
 set.seed(632)
 
-dim(dat[,'Amount'])
 # Jags takes input as list
-data_jags = list(y=dat.scaled$Class, PC1=dat.reduced[,'PC1'], PC2=dat.reduced[,'PC2'], PC3=dat.reduced[,'PC3'], PC4=dat.reduced[,'PC4'], PC5=dat.reduced[,'PC5'], PC6=dat.reduced[,'PC6'], PC7=dat.reduced[,'PC7'], PC8=dat.reduced[,'PC8'], PC9=dat.reduced[,'PC9'], PC10=dat.reduced[,'PC10'], PC11=dat.reduced[,'PC11'], PC12=dat.reduced[,'PC12'], PC13=dat.reduced[,'PC13'], PC14=dat.reduced[,'PC14'], PC15=dat.reduced[,'PC15'], PC16=dat.reduced[,'PC16'], PC17=dat.reduced[,'PC17'], PC18=dat.reduced[,'PC18'], PC19=dat.reduced[,'PC19'], PC20=dat.reduced[,'PC20'], PC21=dat.reduced[,'PC21'], PC22=dat.reduced[,'PC22'], PC23=dat.reduced[,'PC23'], PC24=dat.reduced[,'PC24'], PC25=dat.reduced[,'PC25'])
+data_jags = list(y=dat.train[,'Class'], PC1=dat.train[,'PC1'], PC2=dat.train[,'PC2'], PC3=dat.train[,'PC3'], PC4=dat.train[,'PC4'], PC5=dat.train[,'PC5'], PC6=dat.train[,'PC6'], PC7=dat.train[,'PC7'], PC8=dat.train[,'PC8'], PC9=dat.train[,'PC9'], PC10=dat.train[,'PC10'], PC11=dat.train[,'PC11'], PC12=dat.train[,'PC12'], PC13=dat.train[,'PC13'], PC14=dat.train[,'PC14'], PC15=dat.train[,'PC15'], PC16=dat.train[,'PC16'], PC17=dat.train[,'PC17'], PC18=dat.train[,'PC18'], PC19=dat.train[,'PC19'], PC20=dat.train[,'PC20'], PC21=dat.train[,'PC21'], PC22=dat.train[,'PC22'], PC23=dat.train[,'PC23'], PC24=dat.train[,'PC24'], PC25=dat.train[,'PC25'])
 
 
 # Parameters that we would wanna monitor
@@ -89,7 +112,7 @@ mod3_csim = as.mcmc(do.call(rbind, mod3_sim))
 ```
 
 ```{r, fig.width=10, fig.height=10}
-pdf("modeled_mcmc_dexpmodel_trace.pdf", width=20, height=20)
+pdf("modeled_mcmc_pcapmodel_trace.pdf", width=20, height=20)
 plot(mod3_sim)
 dev.off
 ```
@@ -98,9 +121,9 @@ dev.off
 gelman.diag(mod3_sim)
 ```
 ```{r}
-autocorr.diag(mod1_sim)
-pdf("modeled_mcmc_dexpmodel_acorr.pdf",width=20,height=15)
-autocorr.plot(mod1_sim)
+autocorr.diag(mod3_sim)
+pdf("modeled_mcmc_pcamodel_acorr.pdf",width=20,height=15)
+autocorr.plot(mod3_sim)
 dev.off
 ```
 ```{r}
@@ -111,11 +134,14 @@ effectiveSize(mod3_sim)
 dic1 = dic.samples(mod3, n.iter=1e3)
 dic1
 ```
+```{r}
+dim(dat.train[,1:25])
+```
 
 # PREDICTIONS:
 ```{r}
 pm_coef = colMeans(mod3_csim) # Get the means of the b coefficient. Also equivallent to getting the learned parameters
-pm_Xb = pm_coef ['b0'] + dat.scaled[, 1:29] %*% pm_coef[1:29]
+pm_Xb = pm_coef ['b0'] + dat.train[,1:25] %*% pm_coef[1:25]
 
 phat = 1.0 / (1.0 + exp(-pm_Xb))
 head(phat)
@@ -166,7 +192,7 @@ plotPerfMetric <- function(performanceDF, cutoffRange){
 
 cutoffRange <- seq(.01,.99,length=1000)
 perfMatrix <- performanceMetric(cutoffRange = cutoffRange, 
-                                y = dat$Class, 
+                                y = dat.train[,'Class'], 
                                 y_hat = phat)
 
 perfDF <- data.frame(perfMatrix)
@@ -178,3 +204,30 @@ options(repr.plot.width=6, repr.plot.height=4)
 p <- plotPerfMetric(perfDF, cutoffRange)
 p
 ```
+
+
+
+```{r}
+pm_coef = colMeans(mod3_csim) # Get the means of the b coefficient. Also equivallent to getting the learned parameters
+pm_Xb = pm_coef ['b0'] + dat.test[,1:25] %*% pm_coef[1:25]
+
+phat = 1.0 / (1.0 + exp(-pm_Xb))
+head(phat)
+```
+
+```{r}
+cutoffRange <- seq(.01,.99,length=1000)
+perfMatrix <- performanceMetric(cutoffRange = cutoffRange, 
+                                y = dat.test[,'Class'], 
+                                y_hat = phat)
+
+perfDF <- data.frame(perfMatrix)
+names(perfDF) <- c('accuracy', 'precision', 'recall')
+head(perfDF)
+
+# Plot Accuracy, precision and recall
+options(repr.plot.width=6, repr.plot.height=4)
+p <- plotPerfMetric(perfDF, cutoffRange)
+p
+```
+

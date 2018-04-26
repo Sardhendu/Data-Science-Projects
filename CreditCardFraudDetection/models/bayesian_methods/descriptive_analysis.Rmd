@@ -15,7 +15,7 @@ head(dat)
 
 ```{r}
 # Sample a subset of the data.
-set.seed(619)
+set.seed(673)
 fraud = dat[which(dat$Class == 1),]
 not_fraud = dat[which(dat$Class == 0),]
 dim(fraud)
@@ -25,17 +25,17 @@ dim(not_fraud)
 
 ### Sample a subset of fraud Transaction
 ```{r}
-sample_points = sample(1:28431, 1000, replace=TRUE)
+sample_points = sample(1:28431, 10000, replace=TRUE)
 not_fraud_sample = not_fraud[c(sample_points),]
 dim(not_fraud_sample)
 head(not_fraud_sample)
 ```
 ```{r}
-set.seed(271)
+set.seed(732)
 dat_set = rbind(not_fraud_sample, fraud)
 dat_set = dat_set[sample(nrow(dat_set)),]
 dim(dat_set)
-head(dat_set, 50)
+head(dat_set)
 ```
 
 # Descriptive Analysis:
@@ -46,7 +46,7 @@ dat_set = dat_set[,2:31]
 dim(dat_set)
 head(dat_set)
 outpath = '/Users/sam/All-Program/App-DataSet/DataScienceProjects/CreditCardFraud/'
-write.csv(dat_set, file = paste(outpath,"sample_credit_fraud.csv"))
+write.csv(dat_set, file = paste(outpath,"sample_new_credit_fraud.csv"))
 ```
 # Pair Plot
 * Judging by the plots there seems to be some relation between explanatory variables. Example, (v1, v3, v5, v7) have increasing trend where as (v1 vs v2) and (v1 vs v8) look quite alike. The data points are howeve clutered aroundin for these variable.
