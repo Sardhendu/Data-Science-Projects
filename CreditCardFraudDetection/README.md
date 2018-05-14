@@ -53,7 +53,17 @@ The data set contains 284807 records where 284315 are non-fraud transaction and 
     * [Model Evaluation](https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/model_eval_autoEncoders.ipynb): 
         <img src="https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/images/AEnc_train_valid_roc.png" width="800" height="300"><img src="https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/images/AEnc_test_roc.png" width="400" height="300"><img src="https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/images/AEnc_reconstruction_err_test.png" width="400" height="300">
 
-4. Parallelized Bayesian Networks: (TODO)
+4. [Bayesian Methods](https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/models/bayesian_methods): 
+    * Feature Selection: 
+        * Model with Laplace Prior.
+        * Model with PCA
+    * Up-sampling: SMOTE.
+    * Logistic Model with MCMC sampling posterior.
+    * Model Diagnostics: 
+        * Trace Plots 
+        * Gelman Rubin
+        * Autocorrelation
+    * Mini-Batch RUN
 
 REFERENCES:
 

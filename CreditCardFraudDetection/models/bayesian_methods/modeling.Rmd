@@ -361,35 +361,4 @@ p
 ```
 
 
-# TEST PREDICTIONS:
-```{r}
-pm_coef = colMeans(mod3_csim) # Get the means of the b coefficient. Also equivallent to getting the learned parameters
-pm_Xb = pm_coef ['b0'] + dat.test[, 1:29] %*% pm_coef[c('b1', 'b2','b3','b4', 'b5','b6','b7', 'b8','b9','b10', 'b11','b12','b13', 'b14','b15','b16', 'b17','b18','b19', 'b20','b21', 'b22','b23','b24', 'b25','b26','b27', 'b28', 'b29')]
-dim(dat.train.smotels)
-phat = 1.0 / (1.0 + exp(-pm_Xb))
-
-dim(phat)
-head(phat)
-
-
-dat.train.smotels[,'Class'] = dat.train.smotels[,'Class']-1
-
-```
-```{r}
-# cbind(phat, dat$Class)
-
-cutoffRange <- seq(.01,.99,length=1000)
-perfMatrix <- performanceMetric(cutoffRange = cutoffRange, 
-                                y = dat.test[,'Class'], 
-                                y_hat = phat)
-
-perfDF <- data.frame(perfMatrix)
-names(perfDF) <- c('accuracy', 'precision', 'recall')
-head(perfDF)
-
-# Plot Accuracy, precision and recall
-options(repr.plot.width=6, repr.plot.height=4)
-p <- plotPerfMetric(perfDF, cutoffRange)
-p
-```
 
