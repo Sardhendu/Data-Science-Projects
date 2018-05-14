@@ -12,7 +12,7 @@ The data set contains 284807 records where 284315 are non-fraud transaction and 
 * Test Data: Comprises of 10% of the total data
 * Cross Validation: 10% of data left after removing test data
 * Training: The left out data is used for training.
-* The Fraud Transactions are upsampled only in the training data using SMOTE (Only for Boosting ).
+* The Fraud Transactions are upsampled only in the training data using SMOTE (Used with Boosting and deep network and Bayesian methods ).
 * For Deep Neural Nets, the data is divided into batches. The size is varied for different runs and 2048 is taken to be a good size. 
 * Models are fit on the training data, parameters are adjusted using cross validation score and final performance is obtained using the test data. 
 
@@ -60,7 +60,7 @@ The data set contains 284807 records where 284315 are non-fraud transaction and 
     * Up-sampling: SMOTE.
     * Logistic Model with MCMC sampling posterior.
     * Model Diagnostics: 
-        * Trace Plots 
+        * [Trace Plots](https://github.com/Sardhendu/Data-Science-Projects/blob/master/CreditCardFraudDetection/models/bayesian_methods/modeled_mcmc_trace.pdf) 
         * Gelman Rubin
         * Autocorrelation
     * Mini-Batch RUN

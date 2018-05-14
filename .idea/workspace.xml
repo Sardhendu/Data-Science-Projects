@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f44b8bae-4a94-4ba7-a4dc-46e7a722ad98" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/imp/distribution_plot.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/imp/laplace_prior_bern_lik_sd100.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/imp/modeled_mcmc_dexpmodel_acorr.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/imp/modeled_mcmc_dexpmodel_trace.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/imp/modeled_mcmc_fullmodel_acorr.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/imp/modeled_mcmc_fullmodel_trace.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/imp/pairplot.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/imp/pc_test_dexpmodel.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/imp/pc_test_fullmodel.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/imp/pc_train_dexpmodel.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/imp/pc_train_fullmodel.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/imp/pca.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/imp/pr_test_pcamodel.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/imp/pr_train_pcamodel.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/modeled_mcmc_fullmodel_acorr.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/modeled_mcmc_fullmodel_trace.pdf" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/README.md" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/modeling.Rmd" afterPath="$PROJECT_DIR$/CreditCardFraudDetection/models/bayesian_methods/modeling.Rmd" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -124,8 +107,8 @@
         <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="2060">
-                <caret line="53" column="357" lean-forward="true" selection-start-line="53" selection-start-column="357" selection-end-line="53" selection-end-column="357" />
+              <first_editor relative-caret-position="-1450">
+                <caret line="15" column="84" lean-forward="true" selection-start-line="15" selection-start-column="84" selection-end-line="15" selection-end-column="84" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -777,8 +760,8 @@
     <entry file="file://$PROJECT_DIR$/CreditCardFraudDetection/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="2060">
-            <caret line="53" column="357" lean-forward="true" selection-start-line="53" selection-start-column="357" selection-end-line="53" selection-end-column="357" />
+          <first_editor relative-caret-position="-1450">
+            <caret line="15" column="84" lean-forward="true" selection-start-line="15" selection-start-column="84" selection-end-line="15" selection-end-column="84" />
             <folding />
           </first_editor>
           <second_editor />
